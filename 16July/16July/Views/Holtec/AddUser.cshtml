@@ -1,0 +1,98 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddUser</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/generalstyle.css">
+    <style>
+        .col1 {
+            margin: 2%;
+        }
+
+        .input-field {
+            margin: 2%;
+            padding: 10px;
+            width: 80%;
+        }
+
+        .invalid-feedback {
+            color: red;
+            display: none;
+        }
+
+        .valid-feedback {
+            color: green;
+            display: none;
+        }
+    </style>
+</head>
+<body style="text-align: center;">
+    <div class="container">
+        <div class="row">
+            <div class="col1">
+                <h2 class="display-3 text-success">User Registration Form</h2>
+                <form id="userForm" method="post" novalidate>
+                    <div>
+                        <input type="text" class="input-field" name="name" placeholder="Enter your Name: " required>
+                        <div class="invalid-feedback">Required!</div>
+                        <div class="valid-feedback">Looks Good</div>
+                    </div>
+
+                    <div>
+                        <input type="password" class="input-field" name="password" placeholder="Enter your Password: " required>
+                        <div class="invalid-feedback">Required!</div>
+                        <div class="valid-feedback">Looks Good</div>
+                    </div>
+
+                    <div>
+                        <input type="email" class="input-field" name="email" placeholder="Enter your Email: " required>
+                        <div class="invalid-feedback">Required!</div>
+                        <div class="valid-feedback">Looks Good</div>
+                    </div>
+
+                    <div>
+                        <input type="number" class="input-field" name="mob" placeholder="Enter your Phone No: " required>
+                        <div class="invalid-feedback">Required!</div>
+                        <div class="valid-feedback">Looks Good</div>
+                    </div>
+
+                    <button type="submit" class="btn btn-outline-primary">Save to DB</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('userForm').addEventListener('submit', function (event) {
+            const form = event.target;
+            let isValid = true;
+
+            Array.from(form.elements).forEach(element => {
+                if (element.type !== 'submit' && element.hasAttribute('required')) {
+                    const feedbackInvalid = element.nextElementSibling;
+                    const feedbackValid = feedbackInvalid.nextElementSibling;
+                    if (!element.value.trim()) {
+                        isValid = false;
+                        feedbackInvalid.style.display = 'block';
+                        feedbackValid.style.display = 'none';
+                    } else {
+                        feedbackInvalid.style.display = 'none';
+                        feedbackValid.style.display = 'block';
+                    }
+                }
+            });
+
+            if (!isValid) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        });
+    </script>
+</body>
+</html>
