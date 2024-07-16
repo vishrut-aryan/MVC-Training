@@ -44,7 +44,7 @@ namespace _16July.Controllers
         }*/
 
         //  Using Form Collection
-        public ActionResult AddUser(FormCollection frm)
+        /*public ActionResult AddUser(FormCollection frm)
         {
             SqlConnection conn = new SqlConnection("Data Source = HA-NB69\\SQLEXPRESS;Initial Catalog = HOLTEC;User Id = sa;Password = 12345;");
             conn.Open();
@@ -54,7 +54,21 @@ namespace _16July.Controllers
             cmd.ExecuteNonQuery();
 
             conn.Close();
-            return View();
+            return RedirectToAction("Welcome", "Holtec");
+        }*/
+
+        //  Using Request
+        public ActionResult AddUser(string name)
+        {
+            SqlConnection conn = new SqlConnection("Data Source = HA-NB69\\SQLEXPRESS;Initial Catalog = HOLTEC;User Id = sa;Password = 12345;");
+            conn.Open();
+
+            string query = "INSERT INTO USERDETAILS VALUES('" + Request["name"] + "', '" + Request["password"] + "', '" + Request["email"] + "', '" + Request["mob"] + "')";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+            return RedirectToAction("Welcome", "Holtec");
         }
     }
 }
