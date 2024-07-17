@@ -184,6 +184,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\ICICI\AddUser.cshtml" />
     <Content Include="Views\ICICI\Linkedin.cshtml" />
+    <Content Include="Views\ICICI\ShowUsers.cshtml" />
+    <Content Include="Views\ICICI\Index.cshtml" />
+    <Content Include="Views\ICICI\EditUser.cshtml" />
+    <Content Include="Views\ICICI\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

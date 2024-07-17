@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+}
+
+<h2>Test</h2>
+USERNAME : @ViewData["username"]
+<br>
+EMAIL : @ViewBag.emailid
+<br>
+MOBILE : @TempData["mobile"]
+<br>
+
+@for(int i = 1; i < 10; i++) 
+{
+    <b>@i</b><br>
+}
+<br>
+
+Current DateTime : @System.DateTime.Today.ToString();

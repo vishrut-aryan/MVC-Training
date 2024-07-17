@@ -1,0 +1,88 @@
+﻿@model IEnumerable<MVCMoApp.Models.UserModel>
+
+@{
+    ViewBag.Title = "ShowUsers";
+}
+
+<p>
+    <h2>ShowUsers</h2>
+    @Html.ActionLink("Create new", "AddUser", null, new { @class = "btn btn-outline-dark" })
+</p>
+<p>Employee Table</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditUser", new { id = item.UserId }, new { @class = "btn btn-outline-dark" })
+                @Html.ActionLink("Details", "UserDetails", null, new { @class = "btn btn-outline-dark" })
+                @Html.ActionLink("Delete", "DeleteUser", new { id = item.UserId }, new { @class = "btn btn-outline-dark" })
+            </td>
+        </tr>
+    }
+</table>
+
+<p>Customer Table</p>
+<table class="table">
+    <tr>
+        <th>Customer ID</th>
+        <th>Customer Name</th>
+        <th>Customer Email ID</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (MVCMoApp.Models.Customer item in ViewBag.Customer)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustEmail)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditUser", new { id = item.CustId }, new { @class = "btn btn-outline-dark" })
+                @Html.ActionLink("Details", "UserDetails", null, new { @class = "btn btn-outline-dark" })
+                @Html.ActionLink("Delete", "DeleteUser", new { id = item.CustId }, new { @class = "btn btn-outline-dark" })
+            </td>
+        </tr>
+    }
+
+</table>

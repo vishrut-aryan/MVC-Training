@@ -1,20 +1,19 @@
 ﻿@model MVCMoApp.Models.UserModel
 
 @{
-    ViewBag.Title = "AddUser";
+    ViewBag.Title = "EditUser";
 }
 
-<h2>AddUser</h2>
+<h2>EditUser</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
         <h4>UserModel</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
             @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -50,12 +49,15 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <br><input type="submit" value="Create" class="btn btn-outline-secondary" />
-                <a href="Index" class="btn btn-outline-secondary">Back to Index</a>
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
