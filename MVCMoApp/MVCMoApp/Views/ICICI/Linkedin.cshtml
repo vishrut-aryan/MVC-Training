@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Feed</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f3f2ef;
+        }
+
+        .navbar {
+            background-color: #0077b5;
+        }
+
+        .navbar-brand {
+            color: white;
+        }
+
+        .sidebar, .feed-post, .news-section, .ads-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+            .feed-post img {
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+
+            .feed-post .post-header {
+                display: flex;
+                align-items: center;
+            }
+
+        .messaging-popup {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 300px;
+            height: 400px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: none;
+        }
+
+        .messaging-header {
+            background-color: #0077b5;
+            color: white;
+            padding: 10px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .messaging-body {
+            height: calc(100% - 60px);
+            overflow-y: auto;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">LinkedIn</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">My Network</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Messaging</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Notifications</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sidebar">
+                    <h5>Vishrut Aryan</h5>
+                    <p>Student at SIT - Symbiosis Institute of Technology</p>
+                    <p><strong>Profile viewers</strong>: 9</p>
+                    <p><strong>View all analytics</strong></p>
+                </div>
+                <div class="sidebar">
+                    <h5>Recent</h5>
+                    <p>#pune</p>
+                    <p>#java</p>
+                    <p>#python</p>
+                    <p>#softwareengineering</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="feed-post">
+                    <div class="post-header">
+                        <img src="https://via.placeholder.com/50" alt="User Image">
+                        <div>
+                            <h6 class="m-0">Mansi Seth</h6>
+                            <p class="m-0 text-muted">1st • SRE at PhonePe • SIT2024 • MSBK20</p>
+                        </div>
+                    </div>
+                    <p class="mt-2">It's official! I'm now part of the incredible team at PhonePe as their new Site Reliability Engineer!</p>
+                    <img src="https://via.placeholder.com/300x150" alt="Post Image" class="img-fluid mt-2">
+                </div>
+                <!-- Additional posts can be added here in the same format -->
+
+            </div>
+            <div class="col-md-3">
+                <div class="news-section">
+                    <h5>LinkedIn News</h5>
+                    <p>Chip designers eye smaller cities</p>
+                    <p>DLF most-valued realty firm</p>
+                    <p>India Inc firmly on ESG path</p>
+                    <p>Students rethink study abroad options</p>
+                    <p>Top newsletters of the week</p>
+                </div>
+                <div class="ads-section">
+                    <h5>Ads</h5>
+                    <p>Advertisement content goes here.</p>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary" onclick="toggleMessagingPopup()">Toggle Messaging Popup</button>
+    </div>
+
+    <div class="messaging-popup" id="messagingPopup">
+        <div class="messaging-header">
+            <h6 class="m-0">Messaging</h6>
+            <button class="btn btn-light btn-sm" onclick="toggleMessagingPopup()">Close</button>
+        </div>
+        <div class="messaging-body">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search messages">
+            </div>
+            <div class="message-item">
+                <img src="https://via.placeholder.com/40" alt="User Image">
+                <div class="message-content">
+                    <h6>Pratik Kapasi</h6>
+                    <p>Sponsored: Your unique experience is a fit for Amazon SD...</p>
+                    <span class="text-muted small">Jul 15</span>
+                </div>
+            </div>
+            <div class="message-item">
+                <img src="https://via.placeholder.com/40" alt="User Image">
+                <div class="message-content">
+                    <h6>Parul University Online Lear...</h6>
+                    <p>Sponsored: Admissions Open!</p>
+                    <span class="text-muted small">Jul 3</span>
+                </div>
+            </div>
+            <div class="message-item">
+                <img src="https://via.placeholder.com/40" alt="User Image">
+                <div class="message-content">
+                    <h6>Aryan Jadhav</h6>
+                    <p>You: The day I forgive is the day I die, so just wait a day</p>
+                    <span class="text-muted small">Jan 29</span>
+                </div>
+            </div>
+            <!-- More messages here -->
+        </div>
+    </div>
+
+    <script src="~/Content/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleMessagingPopup() {
+            const popup = document.getElementById('messagingPopup');
+            popup.style.display = popup.style.display === 'none' || popup.style.display === '' ? 'block' : 'none';
+        }
+
+        document.querySelector('.navbar-nav .nav-link[href="#"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            showMessagingPopup();
+        });
+    </script>
+</body>
+</html>

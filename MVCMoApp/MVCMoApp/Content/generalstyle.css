@@ -1,0 +1,32 @@
+*
+{
+    margin: 0%;
+    padding: 0%;
+}
+body
+{
+    height: 100%;
+    width: 100%;
+    color: rgb(203, 114, 114);
+    font-size: 20px;
+}
+.container
+{
+    border: 2px solid rgb(50, 50, 50);
+}
+.container-fluid
+{
+    border: 2px solid rgb(255, 97, 97);
+}
+
+.row
+{
+    border: 2px solid rgb(134, 197, 40);
+    background-color: rgb(149, 212, 214);
+
+}
+
+.col-1, .col-2, .col-3, .col-4, .col-10
+{
+    border: 2px solid rgb(208, 127, 208);
+}

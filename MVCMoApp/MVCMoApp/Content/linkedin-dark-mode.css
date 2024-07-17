@@ -1,0 +1,69 @@
+﻿body {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.navbar {
+    background-color: #1c1c1c;
+}
+
+.navbar-brand {
+    color: #ffffff;
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff;
+}
+
+    .navbar-nav .nav-link.active {
+        background-color: #333333;
+        color: #ffffff;
+    }
+
+.form-control {
+    background-color: #333333;
+    border: 1px solid #555555;
+    color: #ffffff;
+}
+
+.btn-outline-light {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+    .btn-outline-light:hover {
+        background-color: #ffffff;
+        color: #000000;
+    }
+
+.sidebar, .feed-post, .news-section, .ads-section, .messaging-popup {
+    background-color: #1c1c1c;
+    color: #e0e0e0;
+}
+
+    .feed-post .post-header h6, .message-item .message-content h6 {
+        color: #ffffff;
+    }
+
+    .feed-post .post-header p, .message-item .message-content p, .message-item .message-content span {
+        color: #b0b0b0;
+    }
+
+    .feed-post img, .message-item img {
+        border: 1px solid #555555;
+    }
+
+.messaging-header {
+    background-color: #333333;
+}
+
+.btn-primary, .btn-light {
+    background-color: #333333;
+    border-color: #555555;
+    color: #ffffff;
+}
+
+    .btn-primary:hover, .btn-light:hover {
+        background-color: #555555;
+        border-color: #777777;
+    }
