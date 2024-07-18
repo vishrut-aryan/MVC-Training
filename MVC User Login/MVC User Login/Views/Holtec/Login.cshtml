@@ -1,0 +1,107 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Traffic Fine System</title>
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="~/js/jquery.js"></script>
+    <script type="text/javascript" src="~/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery-ui.min.js"></script>
+    <link href="~/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/myStyle.css" rel="stylesheet" type="text/css" />
+    <style>
+    </style>
+    <script>
+        function validate() {
+            if (document.myForm.name.value == "") {
+                alert("Please provide your name!");
+                document.myForm.name.focus();
+                return false;
+            }
+            if (document.myForm.psw.value == "") {
+                alert("Please provide your password!");
+                document.myForm.psw.focus();
+                return false;
+            }
+            alert("Username and Password is accepted\nPress ok to Login");
+            window.open("InitiateFine", "_self");
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1><b>Traffic Fine System</b></h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div class="container bg">
+            <!--<div class="row text-center">
+                <div class="col-lg-12">
+
+                </div>
+            </div>-->
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <!-- <h4>Menu</h4>
+                         <ul>
+                             <li><a>Link-1</a></li>
+                             <li><a>Link-1</a></li>
+                             <li><a>Link-1</a></li>
+                         </ul>-->
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10">
+                    <h3 style="padding-left: 160px;"><span class="fa fa-lock text-danger"></span>&nbsp; User Login</h3>
+                    <br />
+                    <form class="form-horizontal" role="form" name="myForm" method="post">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 col-md-2 col-sm-7 control-label">User Name:</label>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <input type="text" class="form-control" id="name" name="username" placeholder="User Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 col-md-2 col-sm-7 control-label">Password:</label>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <input type="password" class="form-control" id="psw" name="password" placeholder="*********">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <input type="submit" class="btn btn-outline-dark" value="Login" />
+                                <a class="btn btn-default" target="_self" href="Login">Reset</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script>
+            /*$(document).ready(function(e) {
+                $("#btnLogin").click(function(e) {
+                    window.open("AfterLogin");
+                });
+            });*/
+            /*$('#btnLogin').load('AfterLogin', function() {
+            $(this).dialog({
+                modal: true,
+                height: 200
+            });
+});*/
+        </script>
+    </section>
+    <footer>
+    </footer>
+</body>
+</html>

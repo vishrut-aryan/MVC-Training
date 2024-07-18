@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="~/js/jquery.js"></script>
+    <script type="text/javascript" src="~/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery-ui.min.js"></script>
+    <link href="~/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/myStyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div>
+        @Html.ActionLink("Admin View", "UserAdmin", null, new { @class = "btn btn-outline-secondary" })
+        @Html.ActionLink("Adding a User", "AddUser", null, new { @class = "btn btn-outline-secondary" })
+        @Html.ActionLink("Login", "Login", null, new { @class = "btn btn-outline-secondary" })
+    </div>
+</body>
+</html>
