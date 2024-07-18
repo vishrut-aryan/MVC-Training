@@ -23,24 +23,28 @@ namespace MVC_User_Login.Controllers
 
         public ActionResult Login()
         {
+            Session.Clear();
             return View();
         }
 
         public ActionResult UserAdmin()
         {
-            string query;
-            if (Session["USERROLE"].ToString() == "ADMIN")
+            if (Session["USERROLE"] != null)
             {
-                query = "SELECT * FROM USERDETAIL";
+                string query;
+                if (Session["USERROLE"].ToString() == "ADMIN")
+                {
+                    query = "SELECT * FROM USERDETAIL";
+                }
+                else
+                {
+                    query = "SELECT * FROM USERDETAIL WHERE USERNAME='" + Session["USERNAME"].ToString() + "'";
+                }
+                SqlDataAdapter adap = new SqlDataAdapter(query, scoon);
+                DataTable dt = new DataTable();
+                adap.Fill(dt);
+                ViewBag.userdata = dt;
             }
-            else
-            {
-                query = "SELECT * FROM USERDETAIL WHERE USERNAME='" + Session["USERNAME"].ToString() + "'";
-            }
-            SqlDataAdapter adap = new SqlDataAdapter(query, scoon);
-            DataTable dt = new DataTable();
-            adap.Fill(dt);
-            ViewBag.userdata = dt;
             return View();
         }
 
