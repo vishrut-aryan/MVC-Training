@@ -1,0 +1,66 @@
+﻿@model _19July.Models.STUDETAIL
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+<div>
+    <h4>STUDETAIL</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ENGMARKS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ENGMARKS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SCIMARKS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SCIMARKS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MATHMARKS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MATHMARKS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TOTAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TOTAL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GRADE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GRADE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.STUNAME }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

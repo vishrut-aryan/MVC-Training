@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d37c4e0ec03e4e5db4187cab8a59166d" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="HoltecRecruitsModel.applicant" Width="1.5" PointX="8.625" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HoltecRecruitsModel.department" Width="1.5" PointX="15.125" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HoltecRecruitsModel.education" Width="1.5" PointX="5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HoltecRecruitsModel.experience" Width="1.5" PointX="1.625" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HoltecRecruitsModel.job" Width="1.5" PointX="12" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HoltecRecruitsModel.profile" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HoltecRecruitsModel.skill" Width="1.5" PointX="10.375" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HoltecRecruitsModel.user" Width="1.5" PointX="5" PointY="10.25" IsExpanded="true" />
+        <AssociationConnector Association="HoltecRecruitsModel.FK__applicant__job_i__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="HoltecRecruitsModel.FK__applicant__usern__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="HoltecRecruitsModel.FK__jobs__department__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="HoltecRecruitsModel.FK__education__usern__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="HoltecRecruitsModel.FK__experienc__usern__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="HoltecRecruitsModel.FK__profiles__userna__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="HoltecRecruitsModel.FK__skills__username__38996AB5" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

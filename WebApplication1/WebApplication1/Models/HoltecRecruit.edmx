@@ -1,0 +1,614 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HoltecRecruitsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="applicants">
+          <Key>
+            <PropertyRef Name="applicant_id" />
+          </Key>
+          <Property Name="applicant_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="job_id" Type="varchar" MaxLength="100" />
+          <Property Name="username" Type="varchar" MaxLength="100" />
+          <Property Name="fullname" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="department_id" />
+          </Key>
+          <Property Name="department_id" Type="int" Nullable="false" />
+          <Property Name="department_name" Type="varchar" MaxLength="100" />
+          <Property Name="department_manager" Type="varchar" MaxLength="100" />
+          <Property Name="manager_employee_id" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="education">
+          <Key>
+            <PropertyRef Name="eduid" />
+          </Key>
+          <Property Name="eduid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="100" />
+          <Property Name="class_x" Type="varchar" MaxLength="100" />
+          <Property Name="class_xii" Type="varchar" MaxLength="100" />
+          <Property Name="bachelors" Type="varchar" MaxLength="200" />
+          <Property Name="masters" Type="varchar" MaxLength="200" />
+          <Property Name="diploma" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="experience">
+          <Key>
+            <PropertyRef Name="expid" />
+          </Key>
+          <Property Name="expid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="100" />
+          <Property Name="company_1" Type="varchar" MaxLength="100" />
+          <Property Name="role_1" Type="varchar" MaxLength="100" />
+          <Property Name="years_1" Type="int" />
+          <Property Name="company_2" Type="varchar" MaxLength="100" />
+          <Property Name="role_2" Type="varchar" MaxLength="100" />
+          <Property Name="years_2" Type="int" />
+          <Property Name="company_3" Type="varchar" MaxLength="100" />
+          <Property Name="role_3" Type="varchar" MaxLength="100" />
+          <Property Name="years_3" Type="int" />
+          <Property Name="company_4" Type="varchar" MaxLength="100" />
+          <Property Name="role_4" Type="varchar" MaxLength="100" />
+          <Property Name="years_4" Type="int" />
+          <Property Name="company_5" Type="varchar" MaxLength="100" />
+          <Property Name="role_5" Type="varchar" MaxLength="100" />
+          <Property Name="years_5" Type="int" />
+        </EntityType>
+        <EntityType Name="jobs">
+          <Key>
+            <PropertyRef Name="job_id" />
+          </Key>
+          <Property Name="job_id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="department_id" Type="int" />
+          <Property Name="job_title" Type="varchar" MaxLength="1000" />
+          <Property Name="job_description" Type="varchar(max)" />
+          <Property Name="salary" Type="varchar" MaxLength="100" />
+          <Property Name="experience" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="profiles">
+          <Key>
+            <PropertyRef Name="profileid" />
+          </Key>
+          <Property Name="profileid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="100" />
+          <Property Name="resumes" Type="varchar" MaxLength="200" />
+          <Property Name="profile_photo" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="skills">
+          <Key>
+            <PropertyRef Name="skillid" />
+          </Key>
+          <Property Name="skillid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="100" />
+          <Property Name="cplusplus" Type="bit" />
+          <Property Name="javascript" Type="bit" />
+          <Property Name="c#" Type="bit" />
+          <Property Name="python" Type="bit" />
+          <Property Name="java" Type="bit" />
+          <Property Name="html" Type="bit" />
+          <Property Name="flutter" Type="bit" />
+          <Property Name="aiml" Type="bit" />
+          <Property Name="react" Type="bit" />
+          <Property Name="angular" Type="bit" />
+          <Property Name="autocad" Type="bit" />
+          <Property Name="computer_graphics" Type="bit" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="fullname" Type="varchar" MaxLength="100" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="password" Type="varchar" MaxLength="100" />
+          <Property Name="date_of_birth" Type="datetime" />
+          <Property Name="gender" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__applicant__job_i__34C8D9D1">
+          <End Role="jobs" Type="Self.jobs" Multiplicity="0..1" />
+          <End Role="applicants" Type="Self.applicants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="jobs">
+              <PropertyRef Name="job_id" />
+            </Principal>
+            <Dependent Role="applicants">
+              <PropertyRef Name="job_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__applicant__usern__35BCFE0A">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="applicants" Type="Self.applicants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="applicants">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__education__usern__2C3393D0">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="education" Type="Self.education" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="education">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__experienc__usern__2F10007B">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="experience" Type="Self.experience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="experience">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__jobs__department__31EC6D26">
+          <End Role="department" Type="Self.department" Multiplicity="0..1" />
+          <End Role="jobs" Type="Self.jobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="department_id" />
+            </Principal>
+            <Dependent Role="jobs">
+              <PropertyRef Name="department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__profiles__userna__29572725">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="profiles" Type="Self.profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="profiles">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__skills__username__38996AB5">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="skills" Type="Self.skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="skills">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HoltecRecruitsModelStoreContainer">
+          <EntitySet Name="applicants" EntityType="Self.applicants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="education" EntityType="Self.education" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="experience" EntityType="Self.experience" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="jobs" EntityType="Self.jobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="profiles" EntityType="Self.profiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="skills" EntityType="Self.skills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__applicant__job_i__34C8D9D1" Association="Self.FK__applicant__job_i__34C8D9D1">
+            <End Role="jobs" EntitySet="jobs" />
+            <End Role="applicants" EntitySet="applicants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__applicant__usern__35BCFE0A" Association="Self.FK__applicant__usern__35BCFE0A">
+            <End Role="users" EntitySet="users" />
+            <End Role="applicants" EntitySet="applicants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__education__usern__2C3393D0" Association="Self.FK__education__usern__2C3393D0">
+            <End Role="users" EntitySet="users" />
+            <End Role="education" EntitySet="education" />
+          </AssociationSet>
+          <AssociationSet Name="FK__experienc__usern__2F10007B" Association="Self.FK__experienc__usern__2F10007B">
+            <End Role="users" EntitySet="users" />
+            <End Role="experience" EntitySet="experience" />
+          </AssociationSet>
+          <AssociationSet Name="FK__jobs__department__31EC6D26" Association="Self.FK__jobs__department__31EC6D26">
+            <End Role="department" EntitySet="department" />
+            <End Role="jobs" EntitySet="jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__profiles__userna__29572725" Association="Self.FK__profiles__userna__29572725">
+            <End Role="users" EntitySet="users" />
+            <End Role="profiles" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__skills__username__38996AB5" Association="Self.FK__skills__username__38996AB5">
+            <End Role="users" EntitySet="users" />
+            <End Role="skills" EntitySet="skills" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HoltecRecruitsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="applicant">
+          <Key>
+            <PropertyRef Name="applicant_id" />
+          </Key>
+          <Property Name="applicant_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="job_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="job" Relationship="Self.FK__applicant__job_i__34C8D9D1" FromRole="applicants" ToRole="jobs" />
+          <NavigationProperty Name="user" Relationship="Self.FK__applicant__usern__35BCFE0A" FromRole="applicants" ToRole="users" />
+        </EntityType>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="department_id" />
+          </Key>
+          <Property Name="department_id" Type="Int32" Nullable="false" />
+          <Property Name="department_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="department_manager" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="manager_employee_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="jobs" Relationship="Self.FK__jobs__department__31EC6D26" FromRole="department" ToRole="jobs" />
+        </EntityType>
+        <EntityType Name="education">
+          <Key>
+            <PropertyRef Name="eduid" />
+          </Key>
+          <Property Name="eduid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="class_x" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="class_xii" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="bachelors" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="masters" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="diploma" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK__education__usern__2C3393D0" FromRole="education" ToRole="users" />
+        </EntityType>
+        <EntityType Name="experience">
+          <Key>
+            <PropertyRef Name="expid" />
+          </Key>
+          <Property Name="expid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="company_1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="role_1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="years_1" Type="Int32" />
+          <Property Name="company_2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="role_2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="years_2" Type="Int32" />
+          <Property Name="company_3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="role_3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="years_3" Type="Int32" />
+          <Property Name="company_4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="role_4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="years_4" Type="Int32" />
+          <Property Name="company_5" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="role_5" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="years_5" Type="Int32" />
+          <NavigationProperty Name="user" Relationship="Self.FK__experienc__usern__2F10007B" FromRole="experience" ToRole="users" />
+        </EntityType>
+        <EntityType Name="job">
+          <Key>
+            <PropertyRef Name="job_id" />
+          </Key>
+          <Property Name="job_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="department_id" Type="Int32" />
+          <Property Name="job_title" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="job_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="salary" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="experience" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="applicants" Relationship="Self.FK__applicant__job_i__34C8D9D1" FromRole="jobs" ToRole="applicants" />
+          <NavigationProperty Name="department" Relationship="Self.FK__jobs__department__31EC6D26" FromRole="jobs" ToRole="department" />
+        </EntityType>
+        <EntityType Name="profile">
+          <Key>
+            <PropertyRef Name="profileid" />
+          </Key>
+          <Property Name="profileid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="resumes" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="profile_photo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK__profiles__userna__29572725" FromRole="profiles" ToRole="users" />
+        </EntityType>
+        <EntityType Name="skill">
+          <Key>
+            <PropertyRef Name="skillid" />
+          </Key>
+          <Property Name="skillid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cplusplus" Type="Boolean" />
+          <Property Name="javascript" Type="Boolean" />
+          <Property Name="c_" Type="Boolean" />
+          <Property Name="python" Type="Boolean" />
+          <Property Name="java" Type="Boolean" />
+          <Property Name="html" Type="Boolean" />
+          <Property Name="flutter" Type="Boolean" />
+          <Property Name="aiml" Type="Boolean" />
+          <Property Name="react" Type="Boolean" />
+          <Property Name="angular" Type="Boolean" />
+          <Property Name="autocad" Type="Boolean" />
+          <Property Name="computer_graphics" Type="Boolean" />
+          <NavigationProperty Name="user" Relationship="Self.FK__skills__username__38996AB5" FromRole="skills" ToRole="users" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="date_of_birth" Type="DateTime" Precision="3" />
+          <Property Name="gender" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="applicants" Relationship="Self.FK__applicant__usern__35BCFE0A" FromRole="users" ToRole="applicants" />
+          <NavigationProperty Name="educations" Relationship="Self.FK__education__usern__2C3393D0" FromRole="users" ToRole="education" />
+          <NavigationProperty Name="experiences" Relationship="Self.FK__experienc__usern__2F10007B" FromRole="users" ToRole="experience" />
+          <NavigationProperty Name="profiles" Relationship="Self.FK__profiles__userna__29572725" FromRole="users" ToRole="profiles" />
+          <NavigationProperty Name="skills" Relationship="Self.FK__skills__username__38996AB5" FromRole="users" ToRole="skills" />
+        </EntityType>
+        <Association Name="FK__applicant__job_i__34C8D9D1">
+          <End Role="jobs" Type="Self.job" Multiplicity="0..1" />
+          <End Role="applicants" Type="Self.applicant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="jobs">
+              <PropertyRef Name="job_id" />
+            </Principal>
+            <Dependent Role="applicants">
+              <PropertyRef Name="job_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__applicant__usern__35BCFE0A">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="applicants" Type="Self.applicant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="applicants">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__jobs__department__31EC6D26">
+          <End Role="department" Type="Self.department" Multiplicity="0..1" />
+          <End Role="jobs" Type="Self.job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="department_id" />
+            </Principal>
+            <Dependent Role="jobs">
+              <PropertyRef Name="department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__education__usern__2C3393D0">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="education" Type="Self.education" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="education">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__experienc__usern__2F10007B">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="experience" Type="Self.experience" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="experience">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__profiles__userna__29572725">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="profiles" Type="Self.profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="profiles">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__skills__username__38996AB5">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="skills" Type="Self.skill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="skills">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HoltecRecruitsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="applicants" EntityType="Self.applicant" />
+          <EntitySet Name="departments" EntityType="Self.department" />
+          <EntitySet Name="educations" EntityType="Self.education" />
+          <EntitySet Name="experiences" EntityType="Self.experience" />
+          <EntitySet Name="jobs" EntityType="Self.job" />
+          <EntitySet Name="profiles" EntityType="Self.profile" />
+          <EntitySet Name="skills" EntityType="Self.skill" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK__applicant__job_i__34C8D9D1" Association="Self.FK__applicant__job_i__34C8D9D1">
+            <End Role="jobs" EntitySet="jobs" />
+            <End Role="applicants" EntitySet="applicants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__applicant__usern__35BCFE0A" Association="Self.FK__applicant__usern__35BCFE0A">
+            <End Role="users" EntitySet="users" />
+            <End Role="applicants" EntitySet="applicants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__jobs__department__31EC6D26" Association="Self.FK__jobs__department__31EC6D26">
+            <End Role="department" EntitySet="departments" />
+            <End Role="jobs" EntitySet="jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__education__usern__2C3393D0" Association="Self.FK__education__usern__2C3393D0">
+            <End Role="users" EntitySet="users" />
+            <End Role="education" EntitySet="educations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__experienc__usern__2F10007B" Association="Self.FK__experienc__usern__2F10007B">
+            <End Role="users" EntitySet="users" />
+            <End Role="experience" EntitySet="experiences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__profiles__userna__29572725" Association="Self.FK__profiles__userna__29572725">
+            <End Role="users" EntitySet="users" />
+            <End Role="profiles" EntitySet="profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__skills__username__38996AB5" Association="Self.FK__skills__username__38996AB5">
+            <End Role="users" EntitySet="users" />
+            <End Role="skills" EntitySet="skills" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HoltecRecruitsModelStoreContainer" CdmEntityContainer="HoltecRecruitsEntities">
+          <EntitySetMapping Name="applicants">
+            <EntityTypeMapping TypeName="HoltecRecruitsModel.applicant">
+              <MappingFragment StoreEntitySet="applicants">
+                <ScalarProperty Name="applicant_id" ColumnName="applicant_id" />
+                <ScalarProperty Name="job_id" ColumnName="job_id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="departments">
+            <EntityTypeMapping TypeName="HoltecRecruitsModel.department">
+              <MappingFragment StoreEntitySet="department">
+                <ScalarProperty Name="department_id" ColumnName="department_id" />
+                <ScalarProperty Name="department_name" ColumnName="department_name" />
+                <ScalarProperty Name="department_manager" ColumnName="department_manager" />
+                <ScalarProperty Name="manager_employee_id" ColumnName="manager_employee_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="educations">
+            <EntityTypeMapping TypeName="HoltecRecruitsModel.education">
+              <MappingFragment StoreEntitySet="education">
+                <ScalarProperty Name="eduid" ColumnName="eduid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="class_x" ColumnName="class_x" />
+                <ScalarProperty Name="class_xii" ColumnName="class_xii" />
+                <ScalarProperty Name="bachelors" ColumnName="bachelors" />
+                <ScalarProperty Name="masters" ColumnName="masters" />
+                <ScalarProperty Name="diploma" ColumnName="diploma" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="experiences">
+            <EntityTypeMapping TypeName="HoltecRecruitsModel.experience">
+              <MappingFragment StoreEntitySet="experience">
+                <ScalarProperty Name="expid" ColumnName="expid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="company_1" ColumnName="company_1" />
+                <ScalarProperty Name="role_1" ColumnName="role_1" />
+                <ScalarProperty Name="years_1" ColumnName="years_1" />
+                <ScalarProperty Name="company_2" ColumnName="company_2" />
+                <ScalarProperty Name="role_2" ColumnName="role_2" />
+                <ScalarProperty Name="years_2" ColumnName="years_2" />
+                <ScalarProperty Name="company_3" ColumnName="company_3" />
+                <ScalarProperty Name="role_3" ColumnName="role_3" />
+                <ScalarProperty Name="years_3" ColumnName="years_3" />
+                <ScalarProperty Name="company_4" ColumnName="company_4" />
+                <ScalarProperty Name="role_4" ColumnName="role_4" />
+                <ScalarProperty Name="years_4" ColumnName="years_4" />
+                <ScalarProperty Name="company_5" ColumnName="company_5" />
+                <ScalarProperty Name="role_5" ColumnName="role_5" />
+                <ScalarProperty Name="years_5" ColumnName="years_5" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jobs">
+            <EntityTypeMapping TypeName="HoltecRecruitsModel.job">
+              <MappingFragment StoreEntitySet="jobs">
+                <ScalarProperty Name="job_id" ColumnName="job_id" />
+                <ScalarProperty Name="department_id" ColumnName="department_id" />
+                <ScalarProperty Name="job_title" ColumnName="job_title" />
+                <ScalarProperty Name="job_description" ColumnName="job_description" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="experience" ColumnName="experience" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="profiles">
+            <EntityTypeMapping TypeName="HoltecRecruitsModel.profile">
+              <MappingFragment StoreEntitySet="profiles">
+                <ScalarProperty Name="profileid" ColumnName="profileid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="resumes" ColumnName="resumes" />
+                <ScalarProperty Name="profile_photo" ColumnName="profile_photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="skills">
+            <EntityTypeMapping TypeName="HoltecRecruitsModel.skill">
+              <MappingFragment StoreEntitySet="skills">
+                <ScalarProperty Name="skillid" ColumnName="skillid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="cplusplus" ColumnName="cplusplus" />
+                <ScalarProperty Name="javascript" ColumnName="javascript" />
+                <ScalarProperty Name="c_" ColumnName="c#" />
+                <ScalarProperty Name="python" ColumnName="python" />
+                <ScalarProperty Name="java" ColumnName="java" />
+                <ScalarProperty Name="html" ColumnName="html" />
+                <ScalarProperty Name="flutter" ColumnName="flutter" />
+                <ScalarProperty Name="aiml" ColumnName="aiml" />
+                <ScalarProperty Name="react" ColumnName="react" />
+                <ScalarProperty Name="angular" ColumnName="angular" />
+                <ScalarProperty Name="autocad" ColumnName="autocad" />
+                <ScalarProperty Name="computer_graphics" ColumnName="computer_graphics" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="HoltecRecruitsModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
