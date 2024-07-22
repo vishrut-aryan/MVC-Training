@@ -37,6 +37,7 @@ namespace LinkedinPortal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UserEditProfile(UserProfile updatedProfile)
         {
             if (ModelState.IsValid)

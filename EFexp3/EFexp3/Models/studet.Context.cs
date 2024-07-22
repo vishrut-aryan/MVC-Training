@@ -32,26 +32,26 @@ namespace EFexp3.Models
         public DbSet<employee> employees { get; set; }
         public DbSet<USERDETAIL> USERDETAILS { get; set; }
     
-        public virtual int SP_ADDUSER1(string nAME, string pASS, string eMAIL, string mOB, Nullable<System.DateTime> dOB)
+        public virtual int SP_ADDUSER1(USERDETAIL u1)
         {
-            var nAMEParameter = nAME != null ?
-                new ObjectParameter("NAME", nAME) :
+            var nAMEParameter = u1.USERNAME != null ?
+                new ObjectParameter("NAME", u1.USERNAME) :
                 new ObjectParameter("NAME", typeof(string));
     
-            var pASSParameter = pASS != null ?
-                new ObjectParameter("PASS", pASS) :
+            var pASSParameter = u1.PASSWORD != null ?
+                new ObjectParameter("PASS", u1.PASSWORD) :
                 new ObjectParameter("PASS", typeof(string));
     
-            var eMAILParameter = eMAIL != null ?
-                new ObjectParameter("EMAIL", eMAIL) :
+            var eMAILParameter = u1.EMAIL != null ?
+                new ObjectParameter("EMAIL", u1.EMAIL) :
                 new ObjectParameter("EMAIL", typeof(string));
     
-            var mOBParameter = mOB != null ?
-                new ObjectParameter("MOB", mOB) :
+            var mOBParameter = u1.MOBILE != null ?
+                new ObjectParameter("MOB", u1.MOBILE) :
                 new ObjectParameter("MOB", typeof(string));
     
-            var dOBParameter = dOB.HasValue ?
-                new ObjectParameter("DOB", dOB) :
+            var dOBParameter = u1.DATEOFBIRTH.HasValue ?
+                new ObjectParameter("DOB", u1.DATEOFBIRTH) :
                 new ObjectParameter("DOB", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ADDUSER1",nAMEParameter, pASSParameter, eMAILParameter, mOBParameter, dOBParameter);

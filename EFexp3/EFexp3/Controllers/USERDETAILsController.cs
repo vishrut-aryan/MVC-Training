@@ -46,11 +46,11 @@ namespace EFexp3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "USERID,USERNAME,PASSWORD,EMAIL,MOBILE,DATEOFBIRTH,Age")] USERDETAIL uSERDETAIL)
+        public ActionResult Create([Bind(Include = "USERID,USERNAME,PASSWORD,EMAIL,MOBILE,DATEOFBIRTH")] USERDETAIL uSERDETAIL)
         {
             if (ModelState.IsValid)
             {
-                db.USERDETAILS.Add(uSERDETAIL);
+                db.SP_ADDUSER1(uSERDETAIL);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -82,7 +82,7 @@ namespace EFexp3.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(uSERDETAIL).State = EntityState.Modified;
+                db.Entry(uSERDETAIL).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

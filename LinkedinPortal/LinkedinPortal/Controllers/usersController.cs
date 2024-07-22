@@ -22,6 +22,8 @@ namespace LinkedinPortal.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(string email, string password)
         {
             using (SqlConnection conn = new SqlConnection("Data Source=HA-NB69\\SQLEXPRESS;Initial Catalog=linkedin;User Id=sa;Password=12345;"))

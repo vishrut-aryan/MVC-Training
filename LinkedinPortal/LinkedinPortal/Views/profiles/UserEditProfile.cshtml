@@ -85,6 +85,7 @@
         <div class="profile-container">
             <h2>Edit Profile</h2>
             <form action="@Url.Action("UserEditProfile", "profiles")" method="post">
+                @Html.AntiForgeryToken()
                 <div class="mb-3">
                     <label for="fullName" class="form-label">Full Name</label>
                     <input type="text" class="form-control" id="fullName" name="fullName" value="@Model.FullName" required>

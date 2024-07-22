@@ -59,10 +59,10 @@
 </head>
 <body>
     <div class="registration-container">
-        <a class="navbar-brand" href="#">LinkedIn</a>
-        <h3 class="text-center">Register</h3>
+        <a class="navbar-brand">LinkedIn Register</a><br><br>
         @using (Html.BeginForm("Register", "users", FormMethod.Post))
         {
+            @Html.AntiForgeryToken()
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
