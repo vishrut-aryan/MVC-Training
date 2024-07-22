@@ -1,9 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinkedIn Feed</title>
+    <title>LinkedIn Dashboard</title>
     <link rel="stylesheet" href="/bootstrap-5.3.3-dist/css/bootstrap.min.css">
     <style>
         body {
@@ -88,7 +92,7 @@
                         <a class="nav-link text-white" href="#">Notifications</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="UserEditProfile">Edit Profile</a>
+                        <a class="nav-link text-white" href="@Url.Action("UserEditProfile", "profiles")">Edit Profile</a>
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -191,7 +195,7 @@
         }
 
         // Event listener for messaging menu item
-        document.querySelector('.navbar-nav .nav-link[href="#"]').addEventListener('click', function(e) {
+        document.querySelector('.navbar-nav .nav-link[href="#"]').addEventListener('click', function (e) {
             e.preventDefault();
             showMessagingPopup();
         });

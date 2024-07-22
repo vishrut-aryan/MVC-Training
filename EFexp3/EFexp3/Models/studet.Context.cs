@@ -12,6 +12,8 @@ namespace EFexp3.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Linq;
+    using System.Data.Entity.Core.Objects;
     
     public partial class STUDENTSEntities : DbContext
     {
@@ -28,6 +30,31 @@ namespace EFexp3.Models
         public DbSet<department> departments { get; set; }
         public DbSet<designation> designations { get; set; }
         public DbSet<employee> employees { get; set; }
-        public DbSet<USERDETAIL> USERDETAILs { get; set; }
+        public DbSet<USERDETAIL> USERDETAILS { get; set; }
+    
+        public virtual int SP_ADDUSER1(string nAME, string pASS, string eMAIL, string mOB, Nullable<System.DateTime> dOB)
+        {
+            var nAMEParameter = nAME != null ?
+                new ObjectParameter("NAME", nAME) :
+                new ObjectParameter("NAME", typeof(string));
+    
+            var pASSParameter = pASS != null ?
+                new ObjectParameter("PASS", pASS) :
+                new ObjectParameter("PASS", typeof(string));
+    
+            var eMAILParameter = eMAIL != null ?
+                new ObjectParameter("EMAIL", eMAIL) :
+                new ObjectParameter("EMAIL", typeof(string));
+    
+            var mOBParameter = mOB != null ?
+                new ObjectParameter("MOB", mOB) :
+                new ObjectParameter("MOB", typeof(string));
+    
+            var dOBParameter = dOB.HasValue ?
+                new ObjectParameter("DOB", dOB) :
+                new ObjectParameter("DOB", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ADDUSER1",nAMEParameter, pASSParameter, eMAILParameter, mOBParameter, dOBParameter);
+        }
     }
 }

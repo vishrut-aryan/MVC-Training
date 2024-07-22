@@ -32,7 +32,7 @@
           <Property Name="deptid" Type="int" />
           <Property Name="desgid" Type="int" />
         </EntityType>
-        <EntityType Name="USERDETAIL">
+        <EntityType Name="USERDETAILS">
           <Key>
             <PropertyRef Name="USERID" />
           </Key>
@@ -41,6 +41,8 @@
           <Property Name="PASSWORD" Type="varchar" MaxLength="100" />
           <Property Name="EMAIL" Type="varchar" MaxLength="100" />
           <Property Name="MOBILE" Type="varchar" MaxLength="100" />
+          <Property Name="DATEOFBIRTH" Type="datetime" />
+          <Property Name="Age" Type="int" />
         </EntityType>
         <Association Name="FK__employee__deptid__2A4B4B5E">
           <End Role="department" Type="Self.department" Multiplicity="0..1" />
@@ -66,11 +68,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_ADDUSER1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NAME" Type="varchar" Mode="In" />
+          <Parameter Name="PASS" Type="varchar" Mode="In" />
+          <Parameter Name="EMAIL" Type="varchar" Mode="In" />
+          <Parameter Name="MOB" Type="varchar" Mode="In" />
+          <Parameter Name="DOB" Type="datetime" Mode="In" />
+        </Function>
         <EntityContainer Name="STUDENTSModelStoreContainer">
           <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="designation" EntityType="Self.designation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="USERDETAIL" EntityType="Self.USERDETAIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERDETAILS" EntityType="Self.USERDETAILS" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__employee__deptid__2A4B4B5E" Association="Self.FK__employee__deptid__2A4B4B5E">
             <End Role="department" EntitySet="department" />
             <End Role="employee" EntitySet="employee" />
@@ -151,7 +160,14 @@
             <End Role="designation" EntitySet="designations" />
             <End Role="employee" EntitySet="employees" />
           </AssociationSet>
-          <EntitySet Name="USERDETAILs" EntityType="STUDENTSModel.USERDETAIL" />
+          <EntitySet Name="USERDETAILS" EntityType="STUDENTSModel.USERDETAIL" />
+          <FunctionImport Name="SP_ADDUSER1">
+            <Parameter Name="NAME" Mode="In" Type="String" />
+            <Parameter Name="PASS" Mode="In" Type="String" />
+            <Parameter Name="EMAIL" Mode="In" Type="String" />
+            <Parameter Name="MOB" Mode="In" Type="String" />
+            <Parameter Name="DOB" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="USERDETAIL">
           <Key>
@@ -162,6 +178,8 @@
           <Property Name="PASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="MOBILE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DATEOFBIRTH" Type="DateTime" Precision="3" />
+          <Property Name="Age" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -199,9 +217,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="USERDETAILs">
+          <EntitySetMapping Name="USERDETAILS">
             <EntityTypeMapping TypeName="STUDENTSModel.USERDETAIL">
-              <MappingFragment StoreEntitySet="USERDETAIL">
+              <MappingFragment StoreEntitySet="USERDETAILS">
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="DATEOFBIRTH" ColumnName="DATEOFBIRTH" />
                 <ScalarProperty Name="MOBILE" ColumnName="MOBILE" />
                 <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
                 <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
@@ -210,6 +230,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_ADDUSER1" FunctionName="STUDENTSModel.Store.SP_ADDUSER1" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

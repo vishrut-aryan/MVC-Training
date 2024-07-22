@@ -17,7 +17,7 @@ namespace EFexp3.Controllers
         // GET: USERDETAILs
         public ActionResult Index()
         {
-            return View(db.USERDETAILs.ToList());
+            return View(db.USERDETAILS.ToList());
         }
 
         // GET: USERDETAILs/Details/5
@@ -27,7 +27,7 @@ namespace EFexp3.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            USERDETAIL uSERDETAIL = db.USERDETAILs.Find(id);
+            USERDETAIL uSERDETAIL = db.USERDETAILS.Find(id);
             if (uSERDETAIL == null)
             {
                 return HttpNotFound();
@@ -46,11 +46,11 @@ namespace EFexp3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "USERID,USERNAME,PASSWORD,EMAIL,MOBILE")] USERDETAIL uSERDETAIL)
+        public ActionResult Create([Bind(Include = "USERID,USERNAME,PASSWORD,EMAIL,MOBILE,DATEOFBIRTH,Age")] USERDETAIL uSERDETAIL)
         {
             if (ModelState.IsValid)
             {
-                db.USERDETAILs.Add(uSERDETAIL);
+                db.USERDETAILS.Add(uSERDETAIL);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace EFexp3.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            USERDETAIL uSERDETAIL = db.USERDETAILs.Find(id);
+            USERDETAIL uSERDETAIL = db.USERDETAILS.Find(id);
             if (uSERDETAIL == null)
             {
                 return HttpNotFound();
@@ -78,11 +78,11 @@ namespace EFexp3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "USERID,USERNAME,PASSWORD,EMAIL,MOBILE")] USERDETAIL uSERDETAIL)
+        public ActionResult Edit([Bind(Include = "USERID,USERNAME,PASSWORD,EMAIL,MOBILE,DATEOFBIRTH,Age")] USERDETAIL uSERDETAIL)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(uSERDETAIL).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(uSERDETAIL).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -96,7 +96,7 @@ namespace EFexp3.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            USERDETAIL uSERDETAIL = db.USERDETAILs.Find(id);
+            USERDETAIL uSERDETAIL = db.USERDETAILS.Find(id);
             if (uSERDETAIL == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace EFexp3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            USERDETAIL uSERDETAIL = db.USERDETAILs.Find(id);
-            db.USERDETAILs.Remove(uSERDETAIL);
+            USERDETAIL uSERDETAIL = db.USERDETAILS.Find(id);
+            db.USERDETAILS.Remove(uSERDETAIL);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

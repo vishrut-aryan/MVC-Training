@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -12,6 +13,7 @@ namespace LinkedinPortal.Controllers
 {
     public class usersController : Controller
     {
+        SqlConnection conn = new SqlConnection("Data Source = HA-NB69\\SQLEXPRESS;Initial Catalog = linkedin;User Id = sa;Password = 12345;");
         private linkedinEntities2 db = new linkedinEntities2();
 
         [HttpGet]
@@ -20,10 +22,47 @@ namespace LinkedinPortal.Controllers
             return View();
         }
 
-        [HttpPost]
+        public ActionResult Login(string email, string password)
+        {
+            using (SqlConnection conn = new SqlConnection("Data Source=HA-NB69\\SQLEXPRESS;Initial Catalog=linkedin;User Id=sa;Password=12345;"))
+            {
+                conn.Open();
+                string query = "SELECT * FROM users WHERE email = @Email AND password = @Password";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@Password", password);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Set authentication cookie or session
+                            return RedirectToAction("Dashboard", "profiles");
+                        }
+                    }
+                }
+            }
+            ViewBag.Message = "Invalid login attempt";
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult Register()
         {
             return View(); 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register([Bind(Include = "username,email,password,mobile")] user user)
+        {
+            if (ModelState.IsValid)
+            {
+                db.users.Add(user);
+                db.SaveChanges();
+                return RedirectToAction("Login");
+            }
+            return View(user);
         }
 
         // GET: users

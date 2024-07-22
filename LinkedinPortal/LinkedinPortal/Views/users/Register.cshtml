@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@{ Layout = null;}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -59,29 +61,30 @@
     <div class="registration-container">
         <a class="navbar-brand" href="#">LinkedIn</a>
         <h3 class="text-center">Register</h3>
-        <form>
+        @using (Html.BeginForm("Register", "users", FormMethod.Post))
+        {
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
             </div>
             <div class="mb-3">
                 <label for="confirmPassword" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password">
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password">
             </div>
             <div class="mb-3">
                 <label for="mobile" class="form-label">Mobile</label>
-                <input type="text" class="form-control" id="mobile" placeholder="Enter your mobile number">
+                <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Enter your mobile number">
             </div>
             <button type="submit" class="btn btn-primary w-100">Register</button>
-        </form>
+        }
         <p class="text-center mt-3">
             Already have an account? <a href="Login" class="btn btn-outline-primary">Login</a>
         </p>

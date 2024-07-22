@@ -6,6 +6,9 @@ using System.Web;
 
 namespace EFexp3.Models
 {
+    [MetadataType(typeof(UserValidate))]
+    public partial class USERDETAIL { }
+
     public partial class UserValidate
     {
         public int USERID { get; set; }
@@ -22,5 +25,8 @@ namespace EFexp3.Models
 
         [Required(ErrorMessage = "Mobile is Mandatory")]
         public string MOBILE { get; set; }
+
+        [Required(ErrorMessage = "The date format is of 'YYYYMMDD'")]
+        public DateTime DATEOFBIRTH { get; set; }
     }
 }

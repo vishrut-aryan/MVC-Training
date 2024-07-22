@@ -11,10 +11,7 @@ namespace EFexp3.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(UserValidate))]
-
+    
     public partial class USERDETAIL
     {
         public int USERID { get; set; }
@@ -22,5 +19,7 @@ namespace EFexp3.Models
         public string PASSWORD { get; set; }
         public string EMAIL { get; set; }
         public string MOBILE { get; set; }
+        public Nullable<System.DateTime> DATEOFBIRTH { get; set; }
+        public Nullable<int> Age { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -12,16 +13,46 @@ namespace LinkedinPortal.Controllers
 {
     public class profilesController : Controller
     {
+        SqlConnection conn = new SqlConnection("Data Source = HA-NB69\\SQLEXPRESS;Initial Catalog = linkedin;User Id = sa;Password = 12345;");
         private linkedinEntities2 db = new linkedinEntities2();
+
+        private static readonly UserProfile CurrentUserProfile = new UserProfile
+        {
+            FullName = "Vishrut Aryan",
+            Headline = "Student at SIT - Symbiosis Institute of Technology",
+            CurrentPosition = "Student",
+            Location = "Pune, India",
+            About = "Aspiring software engineer with interests in Java and Python."
+        };
 
         public ActionResult Dashboard()
         {
-            return View();
+            return View(CurrentUserProfile);
         }
 
+        [HttpGet]
         public ActionResult UserEditProfile()
         {
-            return View(); 
+            return View(CurrentUserProfile);
+        }
+
+        [HttpPost]
+        public ActionResult UserEditProfile(UserProfile updatedProfile)
+        {
+            if (ModelState.IsValid)
+            {
+                // Update the user profile with the new data
+                CurrentUserProfile.FullName = updatedProfile.FullName;
+                CurrentUserProfile.Headline = updatedProfile.Headline;
+                CurrentUserProfile.CurrentPosition = updatedProfile.CurrentPosition;
+                CurrentUserProfile.Location = updatedProfile.Location;
+                CurrentUserProfile.About = updatedProfile.About;
+
+                // Redirect to the dashboard after saving changes
+                return RedirectToAction("Dashboard");
+            }
+
+            return View(updatedProfile);
         }
 
         // GET: profiles
