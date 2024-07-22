@@ -1,0 +1,26 @@
+﻿@model EFexp3.Models.designation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>designation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.degname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.degname)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.desgid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -8,17 +9,17 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{ECC5775A-9D2C-459B-A538-6A18D87F3261}</ProjectGuid>
+    <ProjectGuid>{6E1E261A-889C-4EAE-B28B-D5F958FF20CA}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebApplication1</RootNamespace>
-    <AssemblyName>WebApplication1</AssemblyName>
+    <RootNamespace>EFexp3</RootNamespace>
+    <AssemblyName>EFexp3</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44367</IISExpressSSLPort>
+    <IISExpressSSLPort>44346</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -45,8 +46,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -126,48 +130,40 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\designationsController.cs" />
+    <Compile Include="Controllers\employeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\USERDETAILsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\applicant.cs">
-      <DependentUpon>HoltecRecruit.tt</DependentUpon>
+    <Compile Include="Models\USERDETAIL.cs">
+      <DependentUpon>studet.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserValidate.cs" />
     <Compile Include="Models\department.cs">
-      <DependentUpon>HoltecRecruit.tt</DependentUpon>
+      <DependentUpon>studet.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\education.cs">
-      <DependentUpon>HoltecRecruit.tt</DependentUpon>
+    <Compile Include="Models\designation.cs">
+      <DependentUpon>studet.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\experience.cs">
-      <DependentUpon>HoltecRecruit.tt</DependentUpon>
+    <Compile Include="Models\employee.cs">
+      <DependentUpon>studet.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HoltecRecruit.Context.cs">
+    <Compile Include="Models\studet.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HoltecRecruit.Context.tt</DependentUpon>
+      <DependentUpon>studet.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HoltecRecruit.cs">
+    <Compile Include="Models\studet.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HoltecRecruit.tt</DependentUpon>
+      <DependentUpon>studet.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\HoltecRecruit.Designer.cs">
+    <Compile Include="Models\studet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HoltecRecruit.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\job.cs">
-      <DependentUpon>HoltecRecruit.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\profile.cs">
-      <DependentUpon>HoltecRecruit.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\skill.cs">
-      <DependentUpon>HoltecRecruit.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\user.cs">
-      <DependentUpon>HoltecRecruit.tt</DependentUpon>
+      <DependentUpon>studet.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -191,15 +187,15 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\HoltecRecruit.Context.tt">
+    <Content Include="Models\studet.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>HoltecRecruit.Context.cs</LastGenOutput>
-      <DependentUpon>HoltecRecruit.edmx</DependentUpon>
+      <LastGenOutput>studet.Context.cs</LastGenOutput>
+      <DependentUpon>studet.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\HoltecRecruit.tt">
+    <Content Include="Models\studet.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HoltecRecruit.edmx</DependentUpon>
-      <LastGenOutput>HoltecRecruit.cs</LastGenOutput>
+      <DependentUpon>studet.edmx</DependentUpon>
+      <LastGenOutput>studet.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -207,12 +203,12 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\HoltecRecruit.edmx">
+    <EntityDeploy Include="Models\studet.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HoltecRecruit.Designer.cs</LastGenOutput>
+      <LastGenOutput>studet.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\HoltecRecruit.edmx.diagram">
-      <DependentUpon>HoltecRecruit.edmx</DependentUpon>
+    <Content Include="Models\studet.edmx.diagram">
+      <DependentUpon>studet.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
@@ -239,6 +235,21 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\designations\Create.cshtml" />
+    <Content Include="Views\designations\Delete.cshtml" />
+    <Content Include="Views\designations\Details.cshtml" />
+    <Content Include="Views\designations\Edit.cshtml" />
+    <Content Include="Views\designations\Index.cshtml" />
+    <Content Include="Views\employees\Create.cshtml" />
+    <Content Include="Views\employees\Delete.cshtml" />
+    <Content Include="Views\employees\Details.cshtml" />
+    <Content Include="Views\employees\Edit.cshtml" />
+    <Content Include="Views\employees\Index.cshtml" />
+    <Content Include="Views\USERDETAILs\Create.cshtml" />
+    <Content Include="Views\USERDETAILs\Delete.cshtml" />
+    <Content Include="Views\USERDETAILs\Details.cshtml" />
+    <Content Include="Views\USERDETAILs\Edit.cshtml" />
+    <Content Include="Views\USERDETAILs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -289,9 +300,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>64673</DevelopmentServerPort>
+          <DevelopmentServerPort>63756</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44367/</IISUrl>
+          <IISUrl>https://localhost:44346/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -306,7 +317,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

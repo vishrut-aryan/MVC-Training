@@ -1,0 +1,57 @@
+﻿@model IEnumerable<LinkedinPortal.Models.post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.headline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postext)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.profile.firstname)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.headline)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postext)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.profile.firstname)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.postid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.postid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.postid })
+        </td>
+    </tr>
+}
+
+</table>

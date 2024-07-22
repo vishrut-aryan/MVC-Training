@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Profile</title>
+    <link rel="stylesheet" href="/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f3f2ef;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .profile-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .navbar {
+            background-color: #0077b5;
+        }
+
+        .navbar-brand {
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: #0077b5;
+            border-color: #0077b5;
+        }
+
+            .btn-primary:hover {
+                background-color: #005582;
+                border-color: #005582;
+            }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #0077b5;
+        }
+
+        .text-center a {
+            color: #0077b5;
+        }
+
+            .text-center a:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">LinkedIn</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">My Network</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Messaging</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Notifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="editprofile.html">Edit Profile</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container profile-container mt-3 md-3">
+        <h3 class="text-center">Your Profile</h3>
+        <form>
+            <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" placeholder="Enter your first name">
+            </div>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" placeholder="Enter your last name">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email address">
+            </div>
+            <div class="mb-3">
+                <label for="mobile" class="form-label">Mobile Number</label>
+                <input type="text" class="form-control" id="mobile" placeholder="Enter your mobile number">
+            </div>
+            <div class="mb-3">
+                <label for="headline" class="form-label">Headline</label>
+                <input type="text" class="form-control" id="headline" placeholder="Enter your headline">
+            </div>
+            <div class="mb-3">
+                <label for="summary" class="form-label">Summary</label>
+                <textarea class="form-control" id="summary" rows="3" placeholder="Enter a brief summary about yourself"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" class="form-control" id="location" placeholder="Enter your location">
+            </div>
+            <div class="mb-3">
+                <label for="industry" class="form-label">Industry</label>
+                <input type="text" class="form-control" id="industry" placeholder="Enter your industry">
+            </div>
+            <div class="mb-3">
+                <label for="education" class="form-label">Education</label>
+                <input type="text" class="form-control" id="education" placeholder="Enter your education">
+            </div>
+            <div class="mb-3">
+                <label for="experience" class="form-label">Experience</label>
+                <textarea class="form-control" id="experience" rows="3" placeholder="Enter your experience"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="skills" class="form-label">Skills</label>
+                <input type="text" class="form-control" id="skills" placeholder="Enter your skills">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Save Profile</button>
+        </form>
+        <p class="text-center mt-3"><a href="#">Back to Dashboard</a></p>
+    </div>
+
+    <script src="/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

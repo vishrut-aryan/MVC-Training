@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="linkedinModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="posts">
+          <Key>
+            <PropertyRef Name="postid" />
+          </Key>
+          <Property Name="postid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="100" />
+          <Property Name="lastname" Type="varchar" MaxLength="100" />
+          <Property Name="headline" Type="varchar" MaxLength="100" />
+          <Property Name="postext" Type="varchar" MaxLength="300" />
+          <Property Name="profileid" Type="int" />
+        </EntityType>
+        <EntityType Name="profiles">
+          <Key>
+            <PropertyRef Name="profileid" />
+          </Key>
+          <Property Name="profileid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="100" />
+          <Property Name="lastname" Type="varchar" MaxLength="100" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="mobile" Type="varchar" MaxLength="100" />
+          <Property Name="headline" Type="varchar" MaxLength="100" />
+          <Property Name="summary" Type="varchar" MaxLength="300" />
+          <Property Name="loc" Type="varchar" MaxLength="100" />
+          <Property Name="education" Type="varchar" MaxLength="100" />
+          <Property Name="experience" Type="varchar" MaxLength="100" />
+          <Property Name="skills" Type="varchar" MaxLength="100" />
+          <Property Name="userid" Type="int" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="100" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="password" Type="varchar" MaxLength="100" />
+          <Property Name="mobile" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__posts__profileid__300424B4">
+          <End Role="profiles" Type="Self.profiles" Multiplicity="0..1" />
+          <End Role="posts" Type="Self.posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profiles">
+              <PropertyRef Name="profileid" />
+            </Principal>
+            <Dependent Role="posts">
+              <PropertyRef Name="profileid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__profiles__userid__2B3F6F97">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="profiles" Type="Self.profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="profiles">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="linkedinModelStoreContainer">
+          <EntitySet Name="posts" EntityType="Self.posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="profiles" EntityType="Self.profiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__posts__profileid__300424B4" Association="Self.FK__posts__profileid__300424B4">
+            <End Role="profiles" EntitySet="profiles" />
+            <End Role="posts" EntitySet="posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__profiles__userid__2B3F6F97" Association="Self.FK__profiles__userid__2B3F6F97">
+            <End Role="users" EntitySet="users" />
+            <End Role="profiles" EntitySet="profiles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="linkedinModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="post">
+          <Key>
+            <PropertyRef Name="postid" />
+          </Key>
+          <Property Name="postid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="headline" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="postext" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="profileid" Type="Int32" />
+          <NavigationProperty Name="profile" Relationship="Self.FK__posts__profileid__300424B4" FromRole="posts" ToRole="profiles" />
+        </EntityType>
+        <EntityType Name="profile">
+          <Key>
+            <PropertyRef Name="profileid" />
+          </Key>
+          <Property Name="profileid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="mobile" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="headline" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="summary" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="loc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="education" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="experience" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="skills" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="userid" Type="Int32" />
+          <NavigationProperty Name="posts" Relationship="Self.FK__posts__profileid__300424B4" FromRole="profiles" ToRole="posts" />
+          <NavigationProperty Name="user" Relationship="Self.FK__profiles__userid__2B3F6F97" FromRole="profiles" ToRole="users" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="mobile" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="profiles" Relationship="Self.FK__profiles__userid__2B3F6F97" FromRole="users" ToRole="profiles" />
+        </EntityType>
+        <Association Name="FK__posts__profileid__300424B4">
+          <End Role="profiles" Type="Self.profile" Multiplicity="0..1" />
+          <End Role="posts" Type="Self.post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profiles">
+              <PropertyRef Name="profileid" />
+            </Principal>
+            <Dependent Role="posts">
+              <PropertyRef Name="profileid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__profiles__userid__2B3F6F97">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="profiles" Type="Self.profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="profiles">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="linkedinEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="posts" EntityType="Self.post" />
+          <EntitySet Name="profiles" EntityType="Self.profile" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK__posts__profileid__300424B4" Association="Self.FK__posts__profileid__300424B4">
+            <End Role="profiles" EntitySet="profiles" />
+            <End Role="posts" EntitySet="posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__profiles__userid__2B3F6F97" Association="Self.FK__profiles__userid__2B3F6F97">
+            <End Role="users" EntitySet="users" />
+            <End Role="profiles" EntitySet="profiles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="linkedinModelStoreContainer" CdmEntityContainer="linkedinEntities2">
+          <EntitySetMapping Name="posts">
+            <EntityTypeMapping TypeName="linkedinModel.post">
+              <MappingFragment StoreEntitySet="posts">
+                <ScalarProperty Name="postid" ColumnName="postid" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="headline" ColumnName="headline" />
+                <ScalarProperty Name="postext" ColumnName="postext" />
+                <ScalarProperty Name="profileid" ColumnName="profileid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="profiles">
+            <EntityTypeMapping TypeName="linkedinModel.profile">
+              <MappingFragment StoreEntitySet="profiles">
+                <ScalarProperty Name="profileid" ColumnName="profileid" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="headline" ColumnName="headline" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+                <ScalarProperty Name="loc" ColumnName="loc" />
+                <ScalarProperty Name="education" ColumnName="education" />
+                <ScalarProperty Name="experience" ColumnName="experience" />
+                <ScalarProperty Name="skills" ColumnName="skills" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="linkedinModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

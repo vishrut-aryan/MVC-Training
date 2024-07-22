@@ -1,0 +1,82 @@
+@charset "utf-8";
+/* CSS Document */
+
+header
+{
+	background-color:black;
+	color:white;
+}
+.bg
+{
+	background-color:#E7E7E7;
+	padding:15px;
+	height:550px;
+	padding-top:0px;
+}
+.bar
+{
+	padding-left:15px;
+	background-color:#D3D3D3;
+}
+.social a
+{
+	padding: 7px;
+color: rgb(216, 191, 191);
+transition: all 0.4s;
+}
+.social a:hover
+{
+	text-decoration:none;
+}
+/*ul
+{
+	
+}
+ul li
+{
+	list-style-type:none;
+}
+ul li a
+{
+	padding:10px;
+	text-decoration:none;
+}
+ul li a:hover
+{
+	text-decoration:none;
+	color:#900;
+	cursor:pointer;
+}*/
+.bd
+{
+	border-right:1px solid;
+	height:400px;
+}
+footer
+{
+	background-color:black;
+	color:white;
+	height:30px;
+}
+.bd a
+{
+	text-decoration:none;
+	font-size:14px;
+	font-weight: 700;
+}
+.bd a:hover
+{
+	text-decoration:none;
+	color:#900;
+	cursor:pointer;
+}
+.bd a:active
+{
+	color:white;
+}
+.hr1
+{
+	margin:10px 0px;
+	border-color:white;
+	border-width: 2.5px;
+}

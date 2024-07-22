@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="STUDENTSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="deptid" />
+          </Key>
+          <Property Name="deptid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="deptname" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="designation">
+          <Key>
+            <PropertyRef Name="desgid" />
+          </Key>
+          <Property Name="desgid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="degname" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="empid" />
+          </Key>
+          <Property Name="empid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empname" Type="varchar" MaxLength="100" />
+          <Property Name="gender" Type="varchar" MaxLength="100" />
+          <Property Name="emailid" Type="varchar" MaxLength="100" />
+          <Property Name="dateofbirth" Type="datetime" />
+          <Property Name="empphoto" Type="varchar" MaxLength="100" />
+          <Property Name="deptid" Type="int" />
+          <Property Name="desgid" Type="int" />
+        </EntityType>
+        <EntityType Name="USERDETAIL">
+          <Key>
+            <PropertyRef Name="USERID" />
+          </Key>
+          <Property Name="USERID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="100" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="100" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="100" />
+          <Property Name="MOBILE" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__employee__deptid__2A4B4B5E">
+          <End Role="department" Type="Self.department" Multiplicity="0..1" />
+          <End Role="employee" Type="Self.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="deptid" />
+            </Principal>
+            <Dependent Role="employee">
+              <PropertyRef Name="deptid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employee__desgid__2B3F6F97">
+          <End Role="designation" Type="Self.designation" Multiplicity="0..1" />
+          <End Role="employee" Type="Self.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="designation">
+              <PropertyRef Name="desgid" />
+            </Principal>
+            <Dependent Role="employee">
+              <PropertyRef Name="desgid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="STUDENTSModelStoreContainer">
+          <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="designation" EntityType="Self.designation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERDETAIL" EntityType="Self.USERDETAIL" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__employee__deptid__2A4B4B5E" Association="Self.FK__employee__deptid__2A4B4B5E">
+            <End Role="department" EntitySet="department" />
+            <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employee__desgid__2B3F6F97" Association="Self.FK__employee__desgid__2B3F6F97">
+            <End Role="designation" EntitySet="designation" />
+            <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="STUDENTSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="deptid" />
+          </Key>
+          <Property Name="deptid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="deptname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="employees" Relationship="Self.FK__employee__deptid__2A4B4B5E" FromRole="department" ToRole="employee" />
+        </EntityType>
+        <EntityType Name="designation">
+          <Key>
+            <PropertyRef Name="desgid" />
+          </Key>
+          <Property Name="desgid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="degname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="employees" Relationship="Self.FK__employee__desgid__2B3F6F97" FromRole="designation" ToRole="employee" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="empid" />
+          </Key>
+          <Property Name="empid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="emailid" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dateofbirth" Type="DateTime" Precision="3" />
+          <Property Name="empphoto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="deptid" Type="Int32" />
+          <Property Name="desgid" Type="Int32" />
+          <NavigationProperty Name="department" Relationship="Self.FK__employee__deptid__2A4B4B5E" FromRole="employee" ToRole="department" />
+          <NavigationProperty Name="designation" Relationship="Self.FK__employee__desgid__2B3F6F97" FromRole="employee" ToRole="designation" />
+        </EntityType>
+        <Association Name="FK__employee__deptid__2A4B4B5E">
+          <End Role="department" Type="Self.department" Multiplicity="0..1" />
+          <End Role="employee" Type="Self.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="deptid" />
+            </Principal>
+            <Dependent Role="employee">
+              <PropertyRef Name="deptid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employee__desgid__2B3F6F97">
+          <End Role="designation" Type="Self.designation" Multiplicity="0..1" />
+          <End Role="employee" Type="Self.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="designation">
+              <PropertyRef Name="desgid" />
+            </Principal>
+            <Dependent Role="employee">
+              <PropertyRef Name="desgid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="STUDENTSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="departments" EntityType="Self.department" />
+          <EntitySet Name="designations" EntityType="Self.designation" />
+          <EntitySet Name="employees" EntityType="Self.employee" />
+          <AssociationSet Name="FK__employee__deptid__2A4B4B5E" Association="Self.FK__employee__deptid__2A4B4B5E">
+            <End Role="department" EntitySet="departments" />
+            <End Role="employee" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employee__desgid__2B3F6F97" Association="Self.FK__employee__desgid__2B3F6F97">
+            <End Role="designation" EntitySet="designations" />
+            <End Role="employee" EntitySet="employees" />
+          </AssociationSet>
+          <EntitySet Name="USERDETAILs" EntityType="STUDENTSModel.USERDETAIL" />
+        </EntityContainer>
+        <EntityType Name="USERDETAIL">
+          <Key>
+            <PropertyRef Name="USERID" />
+          </Key>
+          <Property Name="USERID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MOBILE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="STUDENTSModelStoreContainer" CdmEntityContainer="STUDENTSEntities">
+          <EntitySetMapping Name="departments">
+            <EntityTypeMapping TypeName="STUDENTSModel.department">
+              <MappingFragment StoreEntitySet="department">
+                <ScalarProperty Name="deptid" ColumnName="deptid" />
+                <ScalarProperty Name="deptname" ColumnName="deptname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="designations">
+            <EntityTypeMapping TypeName="STUDENTSModel.designation">
+              <MappingFragment StoreEntitySet="designation">
+                <ScalarProperty Name="desgid" ColumnName="desgid" />
+                <ScalarProperty Name="degname" ColumnName="degname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="STUDENTSModel.employee">
+              <MappingFragment StoreEntitySet="employee">
+                <ScalarProperty Name="empid" ColumnName="empid" />
+                <ScalarProperty Name="empname" ColumnName="empname" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="emailid" ColumnName="emailid" />
+                <ScalarProperty Name="dateofbirth" ColumnName="dateofbirth" />
+                <ScalarProperty Name="empphoto" ColumnName="empphoto" />
+                <ScalarProperty Name="deptid" ColumnName="deptid" />
+                <ScalarProperty Name="desgid" ColumnName="desgid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERDETAILs">
+            <EntityTypeMapping TypeName="STUDENTSModel.USERDETAIL">
+              <MappingFragment StoreEntitySet="USERDETAIL">
+                <ScalarProperty Name="MOBILE" ColumnName="MOBILE" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
