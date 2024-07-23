@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
 namespace CodeFirstExp.Models
 {
-    public class CustomerContext
+    public class CustomerContext : DbContext
     {
+        public CustomerContext() : base("CustomerContext")
+        {
+        }
+
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Customer> Customers { get; set; }
     }
 
     public class City 
