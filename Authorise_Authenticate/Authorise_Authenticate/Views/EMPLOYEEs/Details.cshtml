@@ -1,0 +1,42 @@
+﻿@model Authorise_Authenticate.Models.EMPLOYEE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EMPLOYEE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EMPNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMPNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SALARY)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SALARY)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DESIGNATION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESIGNATION)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EMPID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

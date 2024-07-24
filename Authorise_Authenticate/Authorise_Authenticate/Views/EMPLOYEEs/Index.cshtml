@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Authorise_Authenticate.Models.EMPLOYEE>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EMPNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SALARY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESIGNATION)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMPNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SALARY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESIGNATION)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EMPID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EMPID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EMPID })
+        </td>
+    </tr>
+}
+
+</table>

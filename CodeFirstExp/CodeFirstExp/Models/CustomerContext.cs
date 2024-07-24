@@ -11,10 +11,12 @@ namespace CodeFirstExp.Models
     {
         public CustomerContext() : base("CustomerContext")
         {
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<CustomerContext, CodeFirstExp.Migrations.Configuration>("CustomerContext"));
         }
 
         public DbSet<City> Cities { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 
     public class City 
@@ -34,5 +36,13 @@ namespace CodeFirstExp.Models
         public string CustomerMobile { get; set; }
         public int CityId { get; set; }
         public City Citys { get; set; }
+    }
+
+    public class Employee
+    {
+        [Key]
+        public int EmpId { get; set; }
+        public string EmployeeName { get; set; }
+        public string EmployeeEmail { get; set; }
     }
 }

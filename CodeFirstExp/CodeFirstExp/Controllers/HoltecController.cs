@@ -17,6 +17,11 @@ namespace CodeFirstExp.Controllers
             return View(db.Customers.ToList());
         }
 
+        public ActionResult Emp_Index()
+        {
+            return View(db.Employees.ToList());
+        }
+
         public ActionResult AddCust()
         {
             return View();
@@ -26,6 +31,19 @@ namespace CodeFirstExp.Controllers
         public ActionResult AddCust(Customer c1)
         {
             db.Customers.Add(c1);
+            db.SaveChanges();
+            return View();
+        }
+
+        public ActionResult AddEmp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddEmp(Employee e1)
+        {
+            db.Employees.Add(e1);
             db.SaveChanges();
             return View();
         }
