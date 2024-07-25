@@ -138,6 +138,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ControlClass.cs" />
+    <Compile Include="Models\CustomFilter.cs" />
     <Compile Include="Models\EMPLOYEE.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -246,6 +247,9 @@
     <Content Include="Views\USERs\Index.cshtml" />
     <Content Include="Views\Auth\Test.cshtml" />
     <Content Include="Views\Shared\_MyLayout.cshtml" />
+    <Content Include="Views\Auth\DisplayDate.cshtml" />
+    <Content Include="Views\Shared\_DisplayAdverts.cshtml" />
+    <Content Include="Views\Auth\Add_User.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

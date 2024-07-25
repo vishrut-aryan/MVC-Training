@@ -8,19 +8,21 @@ using System.Web;
 using System.Web.Mvc;
 using Authorise_Authenticate.Models;
 using System.Web.Security;
+using System.Threading;
 
 namespace Authorise_Authenticate.Controllers
 {
-    
-
-    [Authorize]
+    [Authorize, LogDetails]
     public class AuthController : Controller
     {
-        MVCAUTHEntities1 db = new MVCAUTHEntities1();
+        private MVCAUTHEntities1 db = new MVCAUTHEntities1();
 
         // GET: Auth
         public ActionResult Index()
         {
+            string conn = System.Configuration.ConfigurationManager.ConnectionStrings["SQLCONN"].ToString();
+            SqlConnection sconn = new SqlConnection(conn);
+            string fpath = System.Configuration.ConfigurationManager.AppSettings[""].ToString();
             return View();
         }
 
@@ -64,9 +66,27 @@ namespace Authorise_Authenticate.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult Test()
+        public ActionResult Success()
         {
-            return View();
+            return Content("Success");
+        }
+
+        [AllowAnonymous,OutputCache(Duration = 100)]
+        public ActionResult DisplayDate()
+        {
+            return Content(System.DateTime.Now.ToString());
+            //return RedirectToAction("Success");
+        }
+
+        [AllowAnonymous]
+        public ActionResult Add_User() { return View(); }
+
+        [AllowAnonymous, HttpPost]
+        public ActionResult Add_User(USER u1)
+        {
+            db.USERS.Add(u1);
+            db.SaveChanges();
+            return Content("User added successfully");
         }
     }
 }

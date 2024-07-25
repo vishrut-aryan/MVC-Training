@@ -1,0 +1,49 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model MVCCoreApp.Models.Customer
+
+<h1>AddUser</h1>
+
+<h4>Customer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddUser">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">First Integer</label>
+                <input type="number" name="n1" class="form-control" />
+            </div><br><br>
+            <div class="form-group">
+                <label class="control-label">Second Integer</label>
+                <input type="number" name="n2" class="form-control" />
+            </div><br><br>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-success" asp-action="add" />
+                <input type="submit" value="Subtract" class="btn btn-danger" asp-action="subtract" />
+                <input type="submit" value="Multiply" class="btn btn-warning" asp-action="multiply" />
+                <input type="submit" value="Divide" class="btn btn-info" asp-action="divide" />
+            </div>
+        </form>
+    </div>
+    <br><br>
+    <div class="col-md-4">
+        Total: 
+        <input type="text" name="total" value="@ViewBag.Total" />
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

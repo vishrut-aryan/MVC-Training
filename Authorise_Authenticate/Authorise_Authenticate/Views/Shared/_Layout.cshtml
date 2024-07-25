@@ -31,6 +31,8 @@
         @RenderBody()
         <hr />
         <footer>
+            @Html.Partial("_DisplayAdverts");
+            <br>
             @Html.Welcome(@HttpContext.Current.User.Identity.Name)
             <br>
             @HoltecClass.Welcome(@HttpContext.Current.User.Identity.Name)
