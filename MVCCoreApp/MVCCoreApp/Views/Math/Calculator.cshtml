@@ -12,7 +12,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddUser">
+        <form asp-action="Calculator" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label class="control-label">First Integer</label>
@@ -23,10 +23,16 @@
                 <input type="number" name="n2" class="form-control" />
             </div><br><br>
             <div class="form-group">
+                @*
                 <input type="submit" value="Add" class="btn btn-success" asp-action="add" />
                 <input type="submit" value="Subtract" class="btn btn-danger" asp-action="subtract" />
                 <input type="submit" value="Multiply" class="btn btn-warning" asp-action="multiply" />
                 <input type="submit" value="Divide" class="btn btn-info" asp-action="divide" />
+                *@
+                <input type="submit" value="Add" class="btn btn-success" name="btn_input" />
+                <input type="submit" value="Subtract" class="btn btn-danger" name="btn_input" />
+                <input type="submit" value="Multiply" class="btn btn-warning" name="btn_input" />
+                <input type="submit" value="Divide" class="btn btn-info" name="btn_input" />
             </div>
         </form>
     </div>

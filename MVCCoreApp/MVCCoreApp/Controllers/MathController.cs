@@ -14,6 +14,21 @@ namespace MVCCoreApp.Controllers
             return View();
         }
 
+        int total;
+        [HttpPost]
+        public IActionResult Calculator(string n1, string n2, string btn_input, IFormCollection frm)
+        {
+            string nn = frm["n1"].ToString();
+            string nnn = Request.Query["n1"].ToString();
+
+            if (btn_input == "Add") { total = Convert.ToInt32(n1) + Convert.ToInt32(n2); }
+            else if (btn_input == "Subtract") { total = Convert.ToInt32(n1) - Convert.ToInt32(n2); }
+            else if (btn_input == "Multiply") { total = Convert.ToInt32(n1) * Convert.ToInt32(n2); }
+            else if (btn_input == "Divide") { total = Convert.ToInt32(n1) / Convert.ToInt32(n2); }
+            ViewBag.total = total;
+            return View();
+        }
+
         public IActionResult Add(string n1, string n2) 
         {
             int total = Convert.ToInt32(n1) + Convert.ToInt32(n2);

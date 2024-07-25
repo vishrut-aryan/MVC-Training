@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Registration</h1>
+<div>
+    <form method="post" asp-action="Registration" enctype="multipart/form-data">
+        <div>
+            Name : <input type="text" name="tname">
+        </div>
+        <div>
+            Gender : <input type="radio" name="rgender" value="Male">Male
+            <input type="radio" name="rgender" value="Female">Female
+        </div>
+        <div>
+            Date of Birth : <input type="date" name="dtdob">
+        </div>
+        <div>
+            City : <select name="drpcity" asp-items="@ViewBag.cityList as SelectList">
+                <option value="">Select a City</option>
+            </select>
+        </div>
+        <div>
+            Resume : <input type="file" name="fResume">
+        </div>
+        <hr/>
+        <div>
+            <input type="submit" value="Save" class="btn-outline-danger">
+        </div>
+    </form>
+</div>
