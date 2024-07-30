@@ -1,0 +1,53 @@
+﻿<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script type="text/javascript" src="~/Scripts/jquery-3.7.0.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-3.7.0.intellisense.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            alert('test');// do stuff when DOM is ready
+
+            $('#btn1').click(function () {
+
+                var name = $('#txt1').val();
+                alert(name);
+            });
+
+            $('p').mouseover(function () {
+                //alert('mouse over');
+            });
+
+            $("input").focus(function () {
+                $(this).css("background-color", "#333");
+                $(this).css("color", "#ff7f50");
+            });
+
+            $("input").blur(function () {
+                $(this).css("background-color", "#ff7f50");
+                $(this).css("color", "#333");
+            });
+
+            //$('input').click(function () {
+            //    alert("input tag is called");
+            //});
+        });
+    </script>
+
+
+</head>
+<body>
+    <div>
+        <p>
+            This is a paragraph
+        </p>
+        <p>
+            welcome to holtec
+        </p>
+        Name : <input type="text" id="txt1" />
+
+        <input type="button" id="btn1" />
+
+    </div>
+</body>
+</html>

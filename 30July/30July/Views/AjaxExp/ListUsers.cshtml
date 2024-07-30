@@ -1,0 +1,62 @@
+﻿@model IEnumerable<_30July.Models.UserDetails>
+
+@{
+    ViewBag.Title = "ListUsers";
+}
+
+@Html.Partial("AddUserPartial", new _30July.Models.UserDetails())
+
+<h2>ListUsers</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.USERID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.USERNAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PASSWORD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EMAIL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MOBILE)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USERID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USERNAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PASSWORD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EMAIL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MOBILE)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.USERID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.USERID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.USERID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
