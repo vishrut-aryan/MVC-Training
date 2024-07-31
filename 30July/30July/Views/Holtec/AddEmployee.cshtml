@@ -1,0 +1,145 @@
+﻿@model _30July.Models.Employee
+
+@{
+    ViewBag.Title = "AddEmployee";
+}
+<script src="~/Scripts/jquery-3.7.0.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#btnAdd").click(function () {
+            var employee =
+            {
+                FirstName: $("#FirstName").val(),
+                LastName: $("#LastName").val(),
+                City: $("#City").val(),
+                ReportsTo: $("#ReportsTo").val()
+            };
+            $.ajax({
+                type: "POST",
+                URL: "/Holtec/AddEmployee",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify({ emp: employee }),
+                success:
+                    function (response) { $('#employeeList').load("/Holtec/EmployeeDetails"); },
+                error: function (response) { alert(response.responseText); }
+            });
+
+        });
+
+        $('#btnSaveChanges').click(function () {
+            var employee = {
+                EmployeeID: $('#EmployeeID').val(),
+                FirstName: $('#EditFirstName').val(),
+                LastName: $('#EditLastName').val(),
+                City: $('#EditCity').val(),
+                ReportsTo: $('#EditReportsTo').val()
+            };
+
+            $.ajax({
+                url: '/Holtec/UpdateEmployee',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(employee),
+                success: function (response) {
+                    $('#editEmployeeModal').modal('hide');
+                    $('#tblEmployee').load("/Holtec/EmployeeDetails"); // Reload table
+                    alert(response);
+                },
+                error: function (err) {
+                    alert('Unable to update record.');
+                }
+            });
+        });
+    });
+</script>
+<h2>AddEmployee</h2>
+
+
+<div class="modal fade" id="editEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editEmployeeModalLabel">Edit Employee</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm">
+                    <input type="hidden" id="EmployeeID" name="EmployeeID" />
+                    <div class="form-group">
+                        <label for="EditFirstName">First Name</label>
+                        <input type="text" class="form-control" id="EditFirstName" name="FirstName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="EditLastName">Last Name</label>
+                        <input type="text" class="form-control" id="EditLastName" name="LastName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="EditCity">City</label>
+                        <input type="text" class="form-control" id="EditCity" name="City" />
+                    </div>
+                    <div class="form-group">
+                        <label for="EditReportsTo">Reports To</label>
+                        <input type="text" class="form-control" id="EditReportsTo" name="ReportsTo" />
+                    </div>
+                    <button type="button" id="btnSaveChanges" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="form-horizontal">
+    <h4>Employee</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReportsTo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ReportsTo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ReportsTo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" id="btnAdd" class="btn btn-default" />
+        </div>
+    </div>
+    <div class="form-group" id="employeeList">
+        <div class="col-md-12">
+            @Html.Partial("_EmployeeDetails")
+        </div>
+    </div>
+</div>
+

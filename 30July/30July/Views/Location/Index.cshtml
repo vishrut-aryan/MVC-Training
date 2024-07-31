@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Scripts/jquery-3.7.0.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Continent').change(function () {
+            var continentId = $(this).val();
+            $.getJSON('/Location/GetCountries/' + continentId, function (data) {
+                var options = '<option value="">Select a Country</option>';
+                $.each(data, function (i, item) {
+                    options += "<option value='" + item.CountryID + "'>" + item.CountryName + "</option>";
+                });
+                $('#Country').html(options);
+                $('#State').html('<option value="">Select a State</option>');
+                $('#City').html('<option value="">Select a City</option>');
+                $('#Neighborhood').html('<option value="">Select a Neighborhood</option>');
+                $('#Region').html('<option value="">Select a Region</option>');
+                $('#SpecialArea').html('<option value="">Select a Special Area</option>');
+            });
+        });
+
+        $('#Country').change(function () {
+            var countryId = $(this).val();
+            $.getJSON('/Location/GetStates/' + countryId, function (data) {
+                var options = '<option value="">Select a State</option>';
+                $.each(data, function (i, item) {
+                    options += "<option value='" + item.StateID + "'>" + item.StateName + "</option>";
+                });
+                $('#State').html(options);
+                $('#City').html('<option value="">Select a City</option>');
+                $('#Neighborhood').html('<option value="">Select a Neighborhood</option>');
+                $('#Region').html('<option value="">Select a Region</option>');
+                $('#SpecialArea').html('<option value="">Select a Special Area</option>');
+            });
+        });
+
+        $('#State').change(function () {
+            var stateId = $(this).val();
+            $.getJSON('/Location/GetCities/' + stateId, function (data) {
+                var options = '<option value="">Select a City</option>';
+                $.each(data, function (i, item) {
+                    options += "<option value='" + item.CityID + "'>" + item.CityName + "</option>";
+                });
+                $('#City').html(options);
+                $('#Neighborhood').html('<option value="">Select a Neighborhood</option>');
+                $('#Region').html('<option value="">Select a Region</option>');
+                $('#SpecialArea').html('<option value="">Select a Special Area</option>');
+            });
+        });
+
+        $('#City').change(function () {
+            var cityId = $(this).val();
+            $.getJSON('/Location/GetNeighborhoods/' + cityId, function (data) {
+                var options = '<option value="">Select a Neighborhood</option>';
+                $.each(data, function (i, item) {
+                    options += "<option value='" + item.NeighborhoodID + "'>" + item.NeighborhoodName + "</option>";
+                });
+                $('#Neighborhood').html(options);
+                $.getJSON('/Location/GetRegions/' + cityId, function (data) {
+                    var regionOptions = '<option value="">Select a Region</option>';
+                    $.each(data, function (i, item) {
+                        regionOptions += "<option value='" + item.RegionID + "'>" + item.RegionName + "</option>";
+                    });
+                    $('#Region').html(regionOptions);
+                });
+            });
+        });
+
+        $('#Neighborhood').change(function () {
+            var neighborhoodId = $(this).val();
+            $.getJSON('/Location/GetSpecialAreas/' + neighborhoodId, function (data) {
+                var options = '<option value="">Select a Special Area</option>';
+                $.each(data, function (i, item) {
+                    options += "<option value='" + item.SpecialAreaID + "'>" + item.SpecialAreaName + "</option>";
+                });
+                $('#SpecialArea').html(options);
+            });
+        });
+    });
+</script>
+
+<h2>Index</h2>
+
+Continent:
+@Html.DropDownList("Continent", (SelectList)ViewBag.Continents, "Select a Continent", new { id = "Continent" })
+<hr />
+Country:
+@Html.DropDownList("Country", new SelectList(Enumerable.Empty<SelectListItem>()), "Select a Country", new { id = "Country" })
+<hr />
+State:
+@Html.DropDownList("State", new SelectList(Enumerable.Empty<SelectListItem>()), "Select a State", new { id = "State" })
+<hr />
+City:
+@Html.DropDownList("City", new SelectList(Enumerable.Empty<SelectListItem>()), "Select a City", new { id = "City" })
+<hr />
+Neighborhood:
+@Html.DropDownList("Neighborhood", new SelectList(Enumerable.Empty<SelectListItem>()), "Select a Neighborhood", new { id = "Neighborhood" })
+<hr />
+Region:
+@Html.DropDownList("Region", new SelectList(Enumerable.Empty<SelectListItem>()), "Select a Region", new { id = "Region" })
+<hr />
+Special Area:
+@Html.DropDownList("SpecialArea", new SelectList(Enumerable.Empty<SelectListItem>()), "Select a Special Area", new { id = "SpecialArea" })

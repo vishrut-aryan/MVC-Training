@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Scripts/jquery-3.7.0.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#Country').change(function () {
+            var countryId = $(this).val(); // Get selected country value
+            if (countryId) {
+                $.getJSON('/AdmExp/StateList/' + countryId, function (data) {
+                    var items = '<option value="">Select a State</option>';
+                    $.each(data, function (i, state) {
+                        items += "<option value='" + state.Value + "'>" + state.Text + "</option>";
+                    });
+                    $('#StateName').html(items);
+                });
+            }
+
+            else {
+                $('#StateName').html('<option value="">Select a State</option>');
+            }
+        });
+    });
+</script>
+
+
+<h2>Index</h2>
+
+Country :
+@Html.DropDownList("Country", (SelectList)ViewBag.COUNTRYNAME, "Select a Country", new { id = "Country" })
+<hr />
+State :
+@Html.DropDownList("State", new SelectList(Enumerable.Empty<SelectListItem>()), "Select a State", new { id = "StateName" })

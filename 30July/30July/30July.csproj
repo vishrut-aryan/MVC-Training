@@ -45,10 +45,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -120,13 +126,76 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdmExpController.cs" />
     <Compile Include="Controllers\AjaxExpController.cs" />
+    <Compile Include="Controllers\HoltecController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\City.cs">
+      <DependentUpon>Location.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Continent.cs">
+      <DependentUpon>Location.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Country.cs">
+      <DependentUpon>Location.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Location.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Location.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Location.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Location.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Location.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Location.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Neighborhood.cs">
+      <DependentUpon>Location.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Region.cs">
+      <DependentUpon>Location.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SpecialArea.cs">
+      <DependentUpon>Location.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\State.cs">
+      <DependentUpon>Location.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Models\Location.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Location.Context.cs</LastGenOutput>
+      <DependentUpon>Location.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Location.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Location.edmx</DependentUpon>
+      <LastGenOutput>Location.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\AjaxExp\_UserTable.cshtml" />
+    <Content Include="Views\Holtec\AddEmployee.cshtml" />
+    <Content Include="Views\Holtec\_EmployeeDetails.cshtml" />
+    <Content Include="Views\AdmExp\Index.cshtml" />
+    <Content Include="Views\Location\Index.cshtml" />
+    <EntityDeploy Include="Models\Location.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Location.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Location.edmx.diagram">
+      <DependentUpon>Location.edmx</DependentUpon>
+    </Content>
+    <None Include="Views\Shared\_UserTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -212,6 +281,9 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

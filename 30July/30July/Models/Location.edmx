@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFexpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="StateID" Type="int" />
+        </EntityType>
+        <EntityType Name="Continent">
+          <Key>
+            <PropertyRef Name="ContinentID" />
+          </Key>
+          <Property Name="ContinentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContinentName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ContinentID" Type="int" />
+        </EntityType>
+        <EntityType Name="Neighborhood">
+          <Key>
+            <PropertyRef Name="NeighborhoodID" />
+          </Key>
+          <Property Name="NeighborhoodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NeighborhoodName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CityID" Type="int" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="RegionID" />
+          </Key>
+          <Property Name="RegionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CityID" Type="int" />
+        </EntityType>
+        <EntityType Name="SpecialArea">
+          <Key>
+            <PropertyRef Name="SpecialAreaID" />
+          </Key>
+          <Property Name="SpecialAreaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SpecialAreaName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RegionID" Type="int" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateID" />
+          </Key>
+          <Property Name="StateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CountryID" Type="int" />
+        </EntityType>
+        <Association Name="FK__City__StateID__45F365D3">
+          <End Role="State" Type="Self.State" Multiplicity="0..1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateID" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Country__Contine__403A8C7D">
+          <End Role="Continent" Type="Self.Continent" Multiplicity="0..1" />
+          <End Role="Country" Type="Self.Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Continent">
+              <PropertyRef Name="ContinentID" />
+            </Principal>
+            <Dependent Role="Country">
+              <PropertyRef Name="ContinentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Neighborh__CityI__48CFD27E">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Neighborhood" Type="Self.Neighborhood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Neighborhood">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Region__CityID__4BAC3F29">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Region" Type="Self.Region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Region">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SpecialAr__Regio__4E88ABD4">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="SpecialArea" Type="Self.SpecialArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionID" />
+            </Principal>
+            <Dependent Role="SpecialArea">
+              <PropertyRef Name="RegionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__State__CountryID__4316F928">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="State" Type="Self.State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EFexpModelStoreContainer">
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Continent" EntityType="Self.Continent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Neighborhood" EntityType="Self.Neighborhood" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpecialArea" EntityType="Self.SpecialArea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__City__StateID__45F365D3" Association="Self.FK__City__StateID__45F365D3">
+            <End Role="State" EntitySet="State" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Country__Contine__403A8C7D" Association="Self.FK__Country__Contine__403A8C7D">
+            <End Role="Continent" EntitySet="Continent" />
+            <End Role="Country" EntitySet="Country" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Neighborh__CityI__48CFD27E" Association="Self.FK__Neighborh__CityI__48CFD27E">
+            <End Role="City" EntitySet="City" />
+            <End Role="Neighborhood" EntitySet="Neighborhood" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Region__CityID__4BAC3F29" Association="Self.FK__Region__CityID__4BAC3F29">
+            <End Role="City" EntitySet="City" />
+            <End Role="Region" EntitySet="Region" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SpecialAr__Regio__4E88ABD4" Association="Self.FK__SpecialAr__Regio__4E88ABD4">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="SpecialArea" EntitySet="SpecialArea" />
+          </AssociationSet>
+          <AssociationSet Name="FK__State__CountryID__4316F928" Association="Self.FK__State__CountryID__4316F928">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="State" EntitySet="State" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFexpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StateID" Type="Int32" />
+          <NavigationProperty Name="State" Relationship="Self.FK__City__StateID__45F365D3" FromRole="City" ToRole="State" />
+          <NavigationProperty Name="Neighborhoods" Relationship="Self.FK__Neighborh__CityI__48CFD27E" FromRole="City" ToRole="Neighborhood" />
+          <NavigationProperty Name="Regions" Relationship="Self.FK__Region__CityID__4BAC3F29" FromRole="City" ToRole="Region" />
+        </EntityType>
+        <EntityType Name="Continent">
+          <Key>
+            <PropertyRef Name="ContinentID" />
+          </Key>
+          <Property Name="ContinentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContinentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Countries" Relationship="Self.FK__Country__Contine__403A8C7D" FromRole="Continent" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContinentID" Type="Int32" />
+          <NavigationProperty Name="Continent" Relationship="Self.FK__Country__Contine__403A8C7D" FromRole="Country" ToRole="Continent" />
+          <NavigationProperty Name="States" Relationship="Self.FK__State__CountryID__4316F928" FromRole="Country" ToRole="State" />
+        </EntityType>
+        <EntityType Name="Neighborhood">
+          <Key>
+            <PropertyRef Name="NeighborhoodID" />
+          </Key>
+          <Property Name="NeighborhoodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NeighborhoodName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CityID" Type="Int32" />
+          <NavigationProperty Name="City" Relationship="Self.FK__Neighborh__CityI__48CFD27E" FromRole="Neighborhood" ToRole="City" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="RegionID" />
+          </Key>
+          <Property Name="RegionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CityID" Type="Int32" />
+          <NavigationProperty Name="City" Relationship="Self.FK__Region__CityID__4BAC3F29" FromRole="Region" ToRole="City" />
+          <NavigationProperty Name="SpecialAreas" Relationship="Self.FK__SpecialAr__Regio__4E88ABD4" FromRole="Region" ToRole="SpecialArea" />
+        </EntityType>
+        <EntityType Name="SpecialArea">
+          <Key>
+            <PropertyRef Name="SpecialAreaID" />
+          </Key>
+          <Property Name="SpecialAreaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SpecialAreaName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RegionID" Type="Int32" />
+          <NavigationProperty Name="Region" Relationship="Self.FK__SpecialAr__Regio__4E88ABD4" FromRole="SpecialArea" ToRole="Region" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateID" />
+          </Key>
+          <Property Name="StateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CountryID" Type="Int32" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK__City__StateID__45F365D3" FromRole="State" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="Self.FK__State__CountryID__4316F928" FromRole="State" ToRole="Country" />
+        </EntityType>
+        <Association Name="FK__City__StateID__45F365D3">
+          <End Role="State" Type="Self.State" Multiplicity="0..1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateID" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Neighborh__CityI__48CFD27E">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Neighborhood" Type="Self.Neighborhood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Neighborhood">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Region__CityID__4BAC3F29">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Region" Type="Self.Region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Region">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Country__Contine__403A8C7D">
+          <End Role="Continent" Type="Self.Continent" Multiplicity="0..1" />
+          <End Role="Country" Type="Self.Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Continent">
+              <PropertyRef Name="ContinentID" />
+            </Principal>
+            <Dependent Role="Country">
+              <PropertyRef Name="ContinentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__State__CountryID__4316F928">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="State" Type="Self.State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SpecialAr__Regio__4E88ABD4">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="SpecialArea" Type="Self.SpecialArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionID" />
+            </Principal>
+            <Dependent Role="SpecialArea">
+              <PropertyRef Name="RegionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EFexpEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Continents" EntityType="Self.Continent" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="Neighborhoods" EntityType="Self.Neighborhood" />
+          <EntitySet Name="Regions" EntityType="Self.Region" />
+          <EntitySet Name="SpecialAreas" EntityType="Self.SpecialArea" />
+          <EntitySet Name="States" EntityType="Self.State" />
+          <AssociationSet Name="FK__City__StateID__45F365D3" Association="Self.FK__City__StateID__45F365D3">
+            <End Role="State" EntitySet="States" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Neighborh__CityI__48CFD27E" Association="Self.FK__Neighborh__CityI__48CFD27E">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Neighborhood" EntitySet="Neighborhoods" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Region__CityID__4BAC3F29" Association="Self.FK__Region__CityID__4BAC3F29">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Region" EntitySet="Regions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Country__Contine__403A8C7D" Association="Self.FK__Country__Contine__403A8C7D">
+            <End Role="Continent" EntitySet="Continents" />
+            <End Role="Country" EntitySet="Countries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__State__CountryID__4316F928" Association="Self.FK__State__CountryID__4316F928">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="State" EntitySet="States" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SpecialAr__Regio__4E88ABD4" Association="Self.FK__SpecialAr__Regio__4E88ABD4">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="SpecialArea" EntitySet="SpecialAreas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFexpModelStoreContainer" CdmEntityContainer="EFexpEntities">
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="EFexpModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Continents">
+            <EntityTypeMapping TypeName="EFexpModel.Continent">
+              <MappingFragment StoreEntitySet="Continent">
+                <ScalarProperty Name="ContinentID" ColumnName="ContinentID" />
+                <ScalarProperty Name="ContinentName" ColumnName="ContinentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="EFexpModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="ContinentID" ColumnName="ContinentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Neighborhoods">
+            <EntityTypeMapping TypeName="EFexpModel.Neighborhood">
+              <MappingFragment StoreEntitySet="Neighborhood">
+                <ScalarProperty Name="NeighborhoodID" ColumnName="NeighborhoodID" />
+                <ScalarProperty Name="NeighborhoodName" ColumnName="NeighborhoodName" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="EFexpModel.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpecialAreas">
+            <EntityTypeMapping TypeName="EFexpModel.SpecialArea">
+              <MappingFragment StoreEntitySet="SpecialArea">
+                <ScalarProperty Name="SpecialAreaID" ColumnName="SpecialAreaID" />
+                <ScalarProperty Name="SpecialAreaName" ColumnName="SpecialAreaName" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="EFexpModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

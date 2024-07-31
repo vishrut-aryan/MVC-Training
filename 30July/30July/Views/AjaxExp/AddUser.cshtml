@@ -7,32 +7,26 @@
 <script src="~/Scripts/jquery-3.7.0.intellisense.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-
-        alert('test');
         $('#btn1').click(function () {
-
             var Name = $('#USERNAME').val();
             var Pass = $('#PASSWORD').val();
             var Email = $('#EMAIL').val();
             var Mob = $('#MOBILE').val();
-
-            alert(Name);
-
               $.ajax({
-                        type: 'POST',
-                  url: '@Url.Action("SaveUser", "AjaxExp")',
-                  data: '{"UserName":"' + Name + '", "Password":"' + Pass + '", "Email":"' + Email + '", "Mobile":"' + Mob + '"}',
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                  success: function (msg)
-                  {
+                    type: 'POST',
+                    url: '@Url.Action("SaveUser", "AjaxExp")',
+                    data: '{"UserName":"' + Name + '", "Password":"' + Pass + '", "Email":"' + Email + '", "Mobile":"' + Mob + '"}',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (msg)
+                    {
                             
                             alert("Successfully added new item");
                             
-                  },
-                  error: function () {
+                    },
+                    error: function () {
                             alert("Error! Try again...");
-                  }
+                    }
              });
             return false;
         });

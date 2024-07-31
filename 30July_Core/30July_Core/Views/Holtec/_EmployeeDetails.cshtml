@@ -1,0 +1,42 @@
+﻿<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var tr;
+        $.getJSON("/Holtec/GetAllEmployees", function (json) {
+            $.each(json, function (i, emp) {
+                var empid = emp.EmployeeID;
+                tr = $('<tr/>');
+                tr.append("<td class='FirstName'>" + emp.FirstName + "</td>");
+                tr.append("<td class='LastName'>" + emp.LastName + "</td>");
+                tr.append("<td class='City'>" + emp.City + "</td>");
+                tr.append("<td class='ReportsTo'>" + emp.ReportsTo + "</td>");
+                tr.append("<td>" + "<a Onclick='return false;' class='DeleteCss' href=/Holtec/DeleteEmployee/" + empid + ">Delete</a>" + "</td>");
+                $('#tblEmployee').append(tr);
+            });
+        });
+        $('#tblEmployee').on('click', 'td a.DeleteCss', function () {
+            var deleteUrl = $(this).attr("href");
+
+            $.ajax({
+                url: deleteUrl, dataType: "json", type: "POST", contentType: "application/json",
+                error: function (err) { alert('Unable to delete record.'); },
+                success: function (response) { $('#employeeList').load("/Holtec/EmployeeDetails"); }
+            });
+
+        });
+    });
+</script>
+<table id="tblEmployee" class="table  table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>City</th>
+            <th>Report To</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
