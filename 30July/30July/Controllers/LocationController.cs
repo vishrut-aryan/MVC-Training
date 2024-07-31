@@ -11,6 +11,8 @@ namespace _30July.Controllers
     {
         private readonly EFexpEntities _context;
 
+        public LocationController() { }
+
         public LocationController(EFexpEntities context)
         {
             _context = context;
