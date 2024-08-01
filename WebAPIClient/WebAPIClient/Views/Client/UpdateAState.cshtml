@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>All Reservation</title>
+    <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <style>
+        table a, table img {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <h2>Update State</h2>
+        <form id="updateStateForm" class="mb-4">
+            <div class="form-group">
+                <label for="updateStateID">State ID</label>
+                <input type="text" class="form-control" id="updateStateID" placeholder="Enter State ID" readonly>
+            </div>
+            <div class="form-group">
+                <label for="updateStateName">State Name</label>
+                <input type="text" class="form-control" id="updateStateName" placeholder="Enter State Name" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update State</button>
+        </form>
+
+        <table class="table table-sm table-striped table-bordered m-2">
+            <thead>
+                <tr>
+                    <th>STATEID</th>
+                    <th>STATEName</th>
+                    <th>COUNTRYID</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ShowAllReservation();
+
+            function ShowAllReservation() {
+                $("table tbody").html("");
+                $.ajax({
+                    url: "https://localhost:7193/api/HoltecServices/GetStates",
+                    type: "get",
+                    contentType: "application/json",
+                    success: function (result, status, xhr) {
+                        $.each(result, function (index, value) {
+                            $("tbody").append($("<tr>"));
+                            var appendElement = $("tbody tr").last();
+                            appendElement.append($("<td>").html(value["stateID"]));
+                            appendElement.append($("<td>").html(value["stateName"]));
+                            appendElement.append($("<td>").html(value["countryID"]));
+                            appendElement.append($("<td>").html("<button class='btn btn-sm btn-info edit'>Edit</button> <button class='btn btn-sm btn-danger delete'>Delete</button>"));
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr)
+                    }
+                });
+            }
+
+            $("table").on("click", "button.edit", function () {
+                var row = $(this).closest("tr");
+                var stateID = row.find("td:nth-child(1)").text();
+                var stateName = row.find("td:nth-child(2)").text();
+
+                $("#updateStateID").val(stateID);
+                $("#updateStateName").val(stateName);
+            });
+
+            $("table").on("click", "button.delete", function () {
+                var reservationId = $(this).parents("tr").find("td:nth-child(1)").text();
+
+                $.ajax({
+                    url: "https://localhost:7193/api/HoltecServices/DeleteState?id=" + reservationId,
+                    type: "delete",
+                    contentType: "application/json",
+                    success: function (result, status, xhr) {
+                        ShowAllReservation();
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr)
+                    }
+                });
+            });
+
+            $("#updateStateForm").submit(function (event) {
+                event.preventDefault();
+                var stateID = $("#updateStateID").val();
+                var stateName = $("#updateStateName").val();
+
+                $.ajax({
+                    url: "https://localhost:7193/api/HoltecServices/UpdateAState?id=" + stateID,
+                    type: "patch",
+                    contentType: "application/json",
+                    data: JSON.stringify(stateName),
+                    success: function (result, status, xhr) {
+                        ShowAllReservation();
+                        $("#updateStateForm")[0].reset();
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr)
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

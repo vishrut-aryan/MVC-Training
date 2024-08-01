@@ -36,7 +36,7 @@ namespace ApiExp.Controllers
 
         // Pass country id, return states
         // GET api/<HoltecController>/5
-        [HttpGet("GetStatePerCountry/{id}")]
+        [HttpGet("GetStatePerCountry")]
         public IEnumerable<StateDetails> Get(int id)
         {
             List<StateDetails> lststates = new List<StateDetails>();
@@ -79,7 +79,7 @@ namespace ApiExp.Controllers
         }
 
         // PUT api/<HoltecController>/5
-        [HttpPut("UpdateState/{id}")]
+        [HttpPut("UpdateState")]
         public string Put(int id, [FromBody] StateDetails state)
         {
             string query = "UPDATE STATE SET STATE_NAME = @StateName, COUNTRY_ID = @CountryID WHERE STATE_ID = @StateID";
@@ -93,9 +93,20 @@ namespace ApiExp.Controllers
             return "The state was updated successfully";
         }
 
+        [HttpPatch("UpdateAState")]
+        public string Patch(int id, [FromBody] string statename)
+        {
+            string query = "UPDATE STATE SET STATE_NAME = '" + statename + "' WHERE STATE_ID = '" + id + "'";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            return "A state was updated successfully";
+        }
+
         // Service to delete a country by countryID
         // DELETE api/<HoltecController>/5
-        [HttpDelete("DeleteState/{id}")]
+        [HttpDelete("DeleteState")]
         public string Delete(int id)
         {
             string query = "DELETE FROM STATE WHERE STATE_ID=" + id;

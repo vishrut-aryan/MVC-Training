@@ -1,0 +1,30 @@
+﻿@* Partial View for Add State *@
+@{
+    Layout = null;
+}
+<link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<script src="/lib/jquery/dist/jquery.js"></script>
+<style>
+    table a, table img {
+        cursor: pointer;
+    }
+</style>
+
+<h3>Add State New Version</h3>
+<div id="addStateContainer" class="container-fluid">
+    <form id="addStateForm" class="mb-4">
+        <div class="form-group">
+            <label for="stateID">State ID</label>
+            <input type="text" class="form-control" id="stateID" placeholder="Enter State ID" required>
+        </div>
+        <div class="form-group">
+            <label for="stateName">State Name</label>
+            <input type="text" class="form-control" id="stateName" placeholder="Enter State Name" required>
+        </div>
+        <div class="form-group">
+            <label for="countryID">Country ID</label>
+            <input type="text" class="form-control" id="countryID" placeholder="Enter Country ID" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add State</button>
+    </form>
+</div>
