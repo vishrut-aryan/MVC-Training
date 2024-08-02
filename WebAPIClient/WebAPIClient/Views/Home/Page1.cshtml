@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Page1";
+}
+
+<h1>Page 1</h1>
+
+@ViewBag.name | @ViewData["email"] | @TempData["mobile"]
+
+@{
+    TempData.Keep();
+}
+
+<a asp-action="Page2">Page 2</a>
