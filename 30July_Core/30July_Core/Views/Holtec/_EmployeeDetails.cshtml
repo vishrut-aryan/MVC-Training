@@ -2,32 +2,58 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        var pageNumber = 1;
+        var pageSize = 2; // Number of records per page
 
-        var tr;
-        $.getJSON("/Holtec/GetAllEmployees", function (json) {
-            $.each(json, function (i, emp) {
-                var empid = emp.EmployeeID;
-                tr = $('<tr/>');
-                tr.append("<td class='FirstName'>" + emp.FirstName + "</td>");
-                tr.append("<td class='LastName'>" + emp.LastName + "</td>");
-                tr.append("<td class='City'>" + emp.City + "</td>");
-                tr.append("<td class='ReportsTo'>" + emp.ReportsTo + "</td>");
-                tr.append("<td>" + "<a Onclick='return false;' class='DeleteCss' href=/Holtec/DeleteEmployee/" + empid + ">Delete</a>" + "</td>");
-                $('#tblEmployee').append(tr);
+        function loadEmployees(pageNumber) {
+            $.getJSON(`/Holtec/GetEmployeesPage?pageNumber=${pageNumber}&pageSize=${pageSize}`, function (data) {
+                $('#tblEmployee tbody').empty(); // Clear existing rows
+
+                $.each(data.Employees, function (i, emp) {
+                    var empid = emp.EmployeeID;
+                    var tr = $('<tr/>');
+                    tr.append("<td class='FirstName'>" + emp.FirstName + "</td>");
+                    tr.append("<td class='LastName'>" + emp.LastName + "</td>");
+                    tr.append("<td class='City'>" + emp.City + "</td>");
+                    tr.append("<td class='ReportsTo'>" + emp.ReportsTo + "</td>");
+                    tr.append("<td>" + "<a Onclick='return false;' class='DeleteCss' href=/Holtec/DeleteEmployee/" + empid + ">Delete</a>" + "</td>");
+                    $('#tblEmployee').append(tr);
+                });
+
+                // Update pagination
+                var totalPages = Math.ceil(data.TotalCount / pageSize);
+                $('#pagination').empty();
+                for (var i = 1; i <= totalPages; i++) {
+                    var pageLink = $('<a href="#">').text(i).data('page', i);
+                    $('#pagination').append(pageLink);
+                }
             });
-        });
+        }
+
+        loadEmployees(pageNumber);
+
         $('#tblEmployee').on('click', 'td a.DeleteCss', function () {
             var deleteUrl = $(this).attr("href");
 
             $.ajax({
-                url: deleteUrl, dataType: "json", type: "POST", contentType: "application/json",
+                url: deleteUrl,
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json",
                 error: function (err) { alert('Unable to delete record.'); },
-                success: function (response) { $('#employeeList').load("/Holtec/EmployeeDetails"); }
+                success: function (response) { loadEmployees(pageNumber); }
             });
+        });
 
+        $('#pagination').on('click', 'a', function (e) {
+            e.preventDefault();
+            pageNumber = $(this).data('page');
+            loadEmployees(pageNumber);
         });
     });
 </script>
+
+
 <table id="tblEmployee" class="table  table-bordered table-hover">
     <thead>
         <tr>
@@ -40,3 +66,5 @@
     </thead>
     <tbody></tbody>
 </table>
+
+<div id="pagination" style="margin-top: 20px;"></div>

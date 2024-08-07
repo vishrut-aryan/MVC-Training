@@ -160,5 +160,18 @@ namespace _30July_Core.Controllers
         {
             return PartialView("_EmployeeDetails");
         }
+
+        public JsonResult GetEmployeesPage(int pageNumber, int pageSize)
+        {
+            var employees = GetEmployees()
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            var totalEmployees = GetEmployees().Count();
+
+            return Json(new { Employees = employees, TotalCount = totalEmployees }, System.Text.Json.JsonSerializerOptions.Default);
+        }
+
     }
 }
