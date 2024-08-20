@@ -11,13 +11,29 @@ const textInput = document.getElementById('messageText');
 const chat = document.getElementById('chat');
 const messagesQueue = [];
 
-document.getElementById('submitButton').addEventListener('click', () => {
-    var currentdate = new Date();
-    when.innerHTML =
-        (currentdate.getMonth() + 1) + "/"
-        + currentdate.getDate() + 1 + "/"
-        + currentdate.getFullYear() + 1 + " "
-        + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' })
+document.getElementById('submitButton').addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    const text = textInput.value;
+    if (text.trim() === "") return;
+
+    $.ajax({
+        type: "POST",
+        url: '/Home/Create',
+        data: { Text: text },
+        success: function (response) {
+            if (response.success) {
+                debugger;
+                clearInputField();
+                sendMessage();
+            } else {
+                alert('Failed to send message');
+            }
+        },
+        error: function () {
+            alert('Error occurred while sending message');
+        }
+    });
 });
 
 function clearInputField() {
@@ -30,11 +46,12 @@ function sendMessage() {
     if (text.trim() === "") return;
 
     let when = new Date();
-    let message = new Message(username, text);
+    let message = new Message(username, text, when);
     sendMessageToHub(message);
 }
 
 function addMessageToChat(message) {
+    alert("You activated addMessageToChat");
     let isCurrentUserMessage = message.userName === username;
 
     let container = document.createElement('div');
@@ -43,17 +60,16 @@ function addMessageToChat(message) {
     let sender = document.createElement('p');
     sender.className = "sender";
     sender.innerHTML = message.userName;
+
     let text = document.createElement('p');
     text.innerHTML = message.text;
 
     let when = document.createElement('span');
-    when.className = isCurrentUserMessage ? "time-left" : "time-right";
-    var currentdate = new Date();
-    when.innerHTML =
-        (currentdate.getMonth() + 1) + "/"
-        + currentdate.getDate() + 1 + "/"
-        + currentdate.getFullYear() + 1 + " "
-        + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' })
+    when.className = isCurrentUserMessage ? "time-right" : "time-left";
+
+    when.innerHTML = new Date(message.when).toLocaleString('en-US', {
+        hour: 'numeric', minute: 'numeric', second: 'numeric', month: 'numeric', day: 'numeric', year: 'numeric'
+    });
 
     container.appendChild(sender);
     container.appendChild(text);

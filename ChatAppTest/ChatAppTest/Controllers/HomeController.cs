@@ -1,12 +1,17 @@
 using ChatAppTest.Data;
+using ChatAppTest.Hubs;
 using ChatAppTest.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace ChatAppTest.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -31,19 +36,42 @@ namespace ChatAppTest.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Create(Message message)
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("Text")] Message message)
         {
+            var sender = await _userManager.GetUserAsync(User);
+
+            if (sender == null)
+            {
+                return Unauthorized();
+            }
+
+            message.UserName = sender.UserName;
+            message.UserID = sender.Id;
+            message.Sender = sender;
+            message.When = DateTime.Now;
+
+            if (message.Sender != null && message.UserID != null && message.UserName != null)
+            {
+                ModelState["UserName"].ValidationState = ModelValidationState.Valid;
+                ModelState["UserID"].ValidationState = ModelValidationState.Valid;
+                ModelState["Sender"].ValidationState = ModelValidationState.Valid;
+            }
+
             if (ModelState.IsValid)
             {
-                message.UserName = User.Identity.Name;
-                var sender = await _userManager.GetUserAsync(User);
-                message.UserID = sender.Id;
                 await _context.Messages.AddAsync(message);
                 await _context.SaveChangesAsync();
-                return Ok();
+
+                var hubContext = HttpContext.RequestServices.GetRequiredService<IHubContext<ChatHub>>();
+                await hubContext.Clients.All.SendAsync("receiveMessage", message);
+
+                return Json(new { success = true });
             }
-            return Error();
+            var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+            return BadRequest(errors);
         }
+
 
         public IActionResult Privacy()
         {
