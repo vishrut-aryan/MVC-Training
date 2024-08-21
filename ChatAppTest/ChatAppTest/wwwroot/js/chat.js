@@ -12,7 +12,7 @@ const chat = document.getElementById('chat');
 const messagesQueue = [];
 
 document.getElementById('submitButton').addEventListener('click', (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
 
     const text = textInput.value;
     if (text.trim() === "") return;
@@ -23,9 +23,6 @@ document.getElementById('submitButton').addEventListener('click', (event) => {
         data: { Text: text },
         success: function (response) {
             if (response.success) {
-                debugger;
-                clearInputField();
-                sendMessage();
             } else {
                 alert('Failed to send message');
             }
@@ -37,7 +34,6 @@ document.getElementById('submitButton').addEventListener('click', (event) => {
 });
 
 function clearInputField() {
-    messagesQueue.push(textInput.value);
     textInput.value = "";
 }
 
@@ -51,7 +47,6 @@ function sendMessage() {
 }
 
 function addMessageToChat(message) {
-    alert("You activated addMessageToChat");
     let isCurrentUserMessage = message.userName === username;
 
     let container = document.createElement('div');
@@ -75,4 +70,5 @@ function addMessageToChat(message) {
     container.appendChild(text);
     container.appendChild(when);
     chat.appendChild(container);
+    clearInputField();
 }

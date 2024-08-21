@@ -10,7 +10,7 @@ connection.start()
         console.log('SignalR connection established.');
     })
     .catch(err => {
-        console.error('Error establishing SignalR connection:', err.toString());
+        console.error('Error establishing SignalR connection:', err.message.toString());
     });
 
 connection.onclose(async () => {
@@ -19,7 +19,7 @@ connection.onclose(async () => {
         await connection.start();
         console.log('SignalR connection re-established.');
     } catch (err) {
-        console.error('Error re-establishing SignalR connection:', err.toString());
+        console.error('Error re-establishing SignalR connection:', err.message.toString());
     }
 });
 
@@ -27,7 +27,7 @@ function sendMessage(user, message) {
     if (connection.state === signalR.HubConnectionState.Connected) {
         connection.invoke('SendMessage', user, message)
             .catch(err => {
-                console.error('Error sending message:', err.toString());
+                console.error('Error sending message:', err.message.toString());
             });
     } else {
         console.warn('SignalR connection is not established.');

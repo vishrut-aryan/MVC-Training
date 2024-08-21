@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ChatAppTest.Models
 {
@@ -16,6 +17,7 @@ namespace ChatAppTest.Models
 
         public string UserID { get; set; }
 
+        [JsonIgnore]
         public virtual AppUser Sender { get; set; }
     }
 }
